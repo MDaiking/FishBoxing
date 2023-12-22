@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eadf9cf1f3ef02a4a943f827eb02c769, type: 3}
+  m_Name: EquipList
+  m_EditorClassIdentifier: 
+  equipParamList:
+  - equipObject: {fileID: 3450824830947105580, guid: e0b10568a0c341f43bc87e1cd0648dcb,
+      type: 3}
+    name: blue fish
+    equip: 0
+    damage: 10
+    swingSpeed: 0
+    offset: {x: -0.179, y: 0.018, z: 0.062}
+  - equipObject: {fileID: 7875160510175550214, guid: f775d92b3ff22174ca485d0d2d971f92,
+      type: 3}
+    name: salmon
+    equip: 0
+    damage: 8
+    swingSpeed: 0
+    offset: {x: -0.369, y: 0.005, z: 0.024}
+  - equipObject: {fileID: 737533056802261942, guid: ef2a4410bd5270e44b31111d8e913e0c,
+      type: 3}
+    name: sanma
+    equip: 0
+    damage: 12
+    swingSpeed: 0
+    offset: {x: -0.35, y: 0.035, z: -0.028}
+  - equipObject: {fileID: 3891397602343789287, guid: 64f2e13645d680944876400f37fedb16,
+      type: 3}
+    name: red fish
+    equip: 0
+    damage: 10
+    swingSpeed: 0
+    offset: {x: -0.378, y: 0.023, z: 0.034}
+  - equipObject: {fileID: 2128577369806575190, guid: 5931c61373125c746a63de40d36c1a4d,
+      type: 3}
+    name: shark
+    equip: 0
+    damage: 30
+    swingSpeed: 0
+    offset: {x: -1.774, y: 0.073, z: 0.372}

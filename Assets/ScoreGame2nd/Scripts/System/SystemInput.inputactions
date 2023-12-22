@@ -1,0 +1,34 @@
+{
+    "name": "SystemInput",
+    "maps": [
+        {
+            "name": "System",
+            "id": "d2430fc2-0a34-42ed-adda-3d803b4eb011",
+            "actions": [
+                {
+                    "name": "Option",
+                    "type": "Button",
+                    "id": "1fcbc84d-3d4b-4b4b-bb51-061de3915b01",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1f1a0edb-4c95-492c-a377-67de40245274",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Option",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 5820d71226238914a9f1fb20b0e981dc
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - fpsCameraPrefab: {fileID: 3416601826469742948, guid: 9167097d92e99bc4682e830b8bdfd9c8, type: 3}
+  - tpsCameraPrefab: {fileID: 6331543043615147547, guid: 3a5def6da358ebb409def117b068388c, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
