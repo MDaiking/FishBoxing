@@ -26,7 +26,7 @@ public class UISceneView : SceneView
 		Tools.visibleLayers = glovalLayer;
 	}
 
-	void OnGUI()
+	new void OnGUI()
 	{
 		var layers = Tools.visibleLayers;
 		Tools.visibleLayers = 32;
