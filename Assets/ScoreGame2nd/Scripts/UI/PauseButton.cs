@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+[RequireComponent(typeof(TextMeshProUGUI))]
 
-public class PauseButton : MonoBehaviour
+public class PauseButton : ButtonInUI
 {
 	private PauseParent pauseParent;
-	private EventTrigger eventTrigger;
 	private TextMeshProUGUI text;
 	[SerializeField]
 	private Color selectedColor;
@@ -22,7 +23,6 @@ public class PauseButton : MonoBehaviour
 		set { pauseButtonNum = value; }
 	}
 
-	private bool isActive;
 	[SerializeField]
 	private List<GameObject> children;
 	private void Start()
@@ -33,14 +33,17 @@ public class PauseButton : MonoBehaviour
 		}
 
 		pauseParent = transform.parent.GetComponent<PauseParent>();
-		if (text == null) text = GetComponent<TextMeshProUGUI>();
-		AddEventTrigger();
+		text = GetComponent<TextMeshProUGUI>();
+
+		AddEventTrigger(new Action(() => { if (!isSelected) text.color = selectedColor; }),
+			new Action(() => { if (!isSelected) text.color = unselectedColor; }),
+			new Action(() => { pauseParent.ActiveSetting(pauseButtonNum); }));
 	}
 
 	public void SetEnable(bool enable)
 	{
 		if (text == null) text = GetComponent<TextMeshProUGUI>();
-		isActive = enable;
+		isSelected = enable;
 		if (enable)
 		{
 			text.color = activeColor;
@@ -51,31 +54,6 @@ public class PauseButton : MonoBehaviour
 			text.color = unselectedColor;
 			SetActiveAllChildren(false);
 		}
-	}
-	private void AddEventTrigger()
-	{
-		gameObject.AddComponent<EventTrigger>();
-		eventTrigger = GetComponent<EventTrigger>();
-		eventTrigger.triggers = new List<EventTrigger.Entry>();
-
-		//PointerEnter
-		EventTrigger.Entry entryPointerEnter = new EventTrigger.Entry();
-		entryPointerEnter.eventID = EventTriggerType.PointerEnter;
-		entryPointerEnter.callback.AddListener(x => { if (!isActive) text.color = selectedColor; });
-		eventTrigger.triggers.Add(entryPointerEnter);
-
-		//PointerExit
-		EventTrigger.Entry entryPointerExit = new EventTrigger.Entry();
-		entryPointerExit.eventID = EventTriggerType.PointerExit;
-		entryPointerExit.callback.AddListener(x => { if (!isActive) text.color = unselectedColor; });
-		eventTrigger.triggers.Add(entryPointerExit);
-
-		//PointerClick
-		EventTrigger.Entry entryPointerClick = new EventTrigger.Entry();
-		entryPointerClick.eventID = EventTriggerType.PointerClick;
-		entryPointerClick.callback.AddListener(x => { pauseParent.ActiveSetting(pauseButtonNum); });
-		eventTrigger.triggers.Add(entryPointerClick);
-
 	}
 
 	private void SetActiveAllChildren(bool activice)
