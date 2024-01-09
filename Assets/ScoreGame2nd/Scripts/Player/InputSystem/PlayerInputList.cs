@@ -10,14 +10,19 @@ public class PlayerInputList : MonoBehaviour//PIL = PlayerInputList
 	private InputAction attack;
 	private bool canAttack;
 	private bool isAttackStart;
+	private bool isAttackEnd;
 
-	public bool GetCanAttack
+	public bool CanAttack
 	{
 		get { return canAttack; }
 	}
-	public bool StartToGetAttack
+	public bool IsAttackStart
 	{
 		get { return isAttackStart; }
+	}
+	public bool IsAttackEnd
+	{
+		get { return isAttackEnd; }
 	}
 
 	private InputAction move;
@@ -80,6 +85,7 @@ public class PlayerInputList : MonoBehaviour//PIL = PlayerInputList
 	{
 		canAttack = (attack.ReadValue<float>() >= GameManager.threshold);
 		isAttackStart = attack.WasPressedThisFrame();
+		isAttackEnd = attack.WasReleasedThisFrame();
 		moveAxis = move.ReadValue<Vector2>();
 		isJump = (jump.ReadValue<float>() >= GameManager.threshold);
 		isCrouch = (crouch.ReadValue<float>() >= GameManager.threshold);

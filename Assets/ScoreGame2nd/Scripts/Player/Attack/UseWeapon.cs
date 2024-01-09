@@ -17,7 +17,7 @@ public class UseWeapon : MonoBehaviour
 	}
 	private void Update()
 	{
-		if (playerInputList.StartToGetAttack && playerEquips.GetNowWeapon() != null)
+		if (playerInputList.IsAttackStart && playerEquips.GetNowWeapon() != null)
 		{
 			playerEquips.GetNowWeapon().Use();
 		}

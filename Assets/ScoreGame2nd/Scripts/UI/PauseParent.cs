@@ -15,7 +15,7 @@ public class PauseParent : MonoBehaviour
 
 	private GameObject gameManager;
 	private CursorController cursorController;
-	private SIL sil;
+	private SystemInputList sil;
 
 	private bool isPause;
 	private void Start()
@@ -36,7 +36,7 @@ public class PauseParent : MonoBehaviour
 
 		gameManager = GameObject.FindWithTag("GameManager");
 		cursorController = gameManager.GetComponent<CursorController>();
-		sil = gameManager.GetComponent<SIL>();
+		sil = gameManager.GetComponent<SystemInputList>();
 		SetNumInSettings();
 		InactiveSetting();
 	}

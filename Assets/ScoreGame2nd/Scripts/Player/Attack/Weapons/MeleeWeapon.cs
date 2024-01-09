@@ -11,7 +11,14 @@ public class MeleeWeapon : Weapon
 		base.Start();
 		weaponCollider = GetComponent<MeshCollider>();
 	}
+	protected override void Update()
+	{
+		base.Update();
+		if (IsUsing)
+		{
 
+		}
+	}
 	public void SetWeaponCollider(bool isAviable)
 	{
 		weaponCollider.enabled = isAviable;
@@ -26,6 +33,6 @@ public class MeleeWeapon : Weapon
 	public override void Use()
 	{
 		base.Use();
-		animator.SetBool("CanMeleeAttack", true);
+		animator.SetBool("IsAttack", true);
 	}
 }

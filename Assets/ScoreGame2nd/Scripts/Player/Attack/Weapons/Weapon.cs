@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+	protected bool isUsing;
 	private bool canAttack;
 	private bool canHitEnemy;
 	protected Animator animator;
@@ -14,6 +15,10 @@ public class Weapon : MonoBehaviour
 	private int? eatSpeed = null;
 	private int? healAmount = null;
 
+	public bool IsUsing
+	{
+		get{ return isUsing; }
+	}
 	public int Damage
 	{
 		set
@@ -101,9 +106,10 @@ public class Weapon : MonoBehaviour
 
 	protected virtual void Start()
 	{
+		isUsing = false;
 		animator = transform.root.GetComponent<Animator>();
 	}
-	private void Update()
+	protected virtual void Update()
 	{
 		canAttack = animator.GetCurrentAnimatorStateInfo(1).IsName("Attack");
 		if (!canAttack)

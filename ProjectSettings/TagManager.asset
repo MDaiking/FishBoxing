@@ -9,6 +9,7 @@ TagManager:
   - MainCameraPosition
   - Enemy
   - Weapon
+  - Timer
   layers:
   - Default
   - TransparentFX

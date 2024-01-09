@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SIL : MonoBehaviour//SIL = SystemInputList
+public class SystemInputList: MonoBehaviour
 {
 	private PlayerInput systemInput;
 
