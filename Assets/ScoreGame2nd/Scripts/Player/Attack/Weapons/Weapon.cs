@@ -8,6 +8,12 @@ public class Weapon : MonoBehaviour
 	private bool canHitEnemy;
 	protected Animator animator;
 	private int? damage = null;
+	private int? readyForSwingSpeed = null;
+	private int? swingSpeed = null;
+	private int? knockbackPower = null;
+	private int? eatSpeed = null;
+	private int? healAmount = null;
+
 	public int Damage
 	{
 		set
@@ -19,6 +25,76 @@ public class Weapon : MonoBehaviour
 			else
 			{
 				Debug.LogError("ダメージ量を再定義することはできません");
+			}
+		}
+	}
+	public int ReadyForSwingSpeed
+	{
+		set
+		{
+			if (readyForSwingSpeed == null)
+			{
+				readyForSwingSpeed = value;
+			}
+			else
+			{
+				Debug.LogError("構え速度を再定義することはできません");
+			}
+		}
+	}
+	public int SwingSpeed
+	{
+		set
+		{
+			if (swingSpeed == null)
+			{
+				swingSpeed = value;
+			}
+			else
+			{
+				Debug.LogError("振り速度を再定義することはできません");
+			}
+		}
+	}
+	public int KnockbackPower
+	{
+		set
+		{
+			if (knockbackPower == null)
+			{
+				knockbackPower = value;
+			}
+			else
+			{
+				Debug.LogError("ノックバック力を再定義することはできません");
+			}
+		}
+	}
+	public int EatSpeed
+	{
+		set
+		{
+			if (eatSpeed == null)
+			{
+				eatSpeed = value;
+			}
+			else
+			{
+				Debug.LogError("食事速度を再定義することはできません");
+			}
+		}
+	}
+	public int HealAmount
+	{
+		set
+		{
+			if (healAmount == null)
+			{
+				healAmount = value;
+			}
+			else
+			{
+				Debug.LogError("回復量を再定義することはできません");
 			}
 		}
 	}
@@ -46,6 +122,7 @@ public class Weapon : MonoBehaviour
 	{
 		if (canAttack && !canHitEnemy)
 		{
+			Debug.Log("damage "+ damage + " to " + enemyStatus);
 			canHitEnemy = true;
 			enemyStatus.Damaged((int)damage);
 		}

@@ -22,7 +22,7 @@ public class SelectWeaponParent : MonoBehaviour
 	}
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space) && canMove)
+		if (Input.GetKeyDown(KeyCode.B) && canMove)
 		{
 			testBool = !testBool;
 			ToggleUI(testBool);

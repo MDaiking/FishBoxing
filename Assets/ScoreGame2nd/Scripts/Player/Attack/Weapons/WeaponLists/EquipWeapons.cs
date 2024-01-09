@@ -17,7 +17,15 @@ public class EquipWeapons : MonoBehaviour
 			GameObject equip = Instantiate(equipParam.equipObject, transform);
 			equip.transform.localPosition = equipParam.offset;
 			equip.transform.localRotation = defaultEquipRotation;
-			weapons.Add(equip.GetComponent<Weapon>());
+			Weapon weapon = equip.GetComponent<Weapon>();
+
+			weapon.Damage = equipParam.damage;
+			weapon.ReadyForSwingSpeed = equipParam.readyForSwingSpeed;
+			weapon.SwingSpeed = equipParam.swingSpeed;
+			weapon.EatSpeed = equipParam.eatSpeed;
+			weapon.HealAmount = equipParam.healAmount;
+
+			weapons.Add(weapon);
 
 		}
 		ChangeWeapon(startEquip);
