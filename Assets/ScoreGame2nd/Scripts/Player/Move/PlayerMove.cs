@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[RequireComponent(typeof(PlayerInputList),typeof(CharacterController),typeof(Animator))]
+[RequireComponent(typeof(UseWeapon))]
 
 public class PlayerMove : Unity.Netcode.NetworkBehaviour
 {
@@ -11,6 +13,8 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 	private float backDeboost;
 	[SerializeField]//しゃがみ時の減衰割合
 	private float crouchDeboost;
+	[SerializeField]//武器構え時の減衰割合
+	private float readyToAttackDeboost;
 	private bool isCrouch;
 	private bool enableIsCrouch;//しゃがむことが可能か。ジャンプ時にfalse
 	[SerializeField]
@@ -19,6 +23,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 	private CharacterController controller;
 	private Vector3 velocity;
 
+	private UseWeapon useWeapon;
 	private Animator animator;
 	[SerializeField]
 	//private Animator armAnimator;//一人称時のみ表示される腕のアニメーター
@@ -35,6 +40,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 			pil = GetComponent<PlayerInputList>();
 			controller = GetComponent<CharacterController>();
 			animator = GetComponent<Animator>();
+			useWeapon = GetComponent<UseWeapon>();
 			enableIsCrouch = true;
 			isCrouch = false;
 		}
@@ -82,6 +88,10 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 			if (pil.MoveAxis.y <= 0f)//後退時は減速
 			{
 				velocity *= backDeboost;
+			}
+			if (!useWeapon.IsIdleAnimation())//腕の状態がidle以外の場合(武器構えなど)減速
+			{
+				velocity *= readyToAttackDeboost;
 			}
 		}
 		JumpAndGravity();

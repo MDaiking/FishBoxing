@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+	protected GameObject player;
+	private UseWeapon useWeapon;
 	protected bool isUsing;
-	private bool canAttack;
+	private bool isAttackAnimation;
 	private bool canHitEnemy;
 	protected Animator animator;
-	private int? damage = null;
-	private int? readyForSwingSpeed = null;
-	private int? swingSpeed = null;
-	private int? knockbackPower = null;
-	private int? eatSpeed = null;
-	private int? healAmount = null;
+	protected int? damage = null;
+	protected float? readyForSwingSpeed = null;
+	protected float? swingSpeed = null;
+	protected int? knockbackPower = null;
+	protected float? eatSpeed = null;
+	protected int? healAmount = null;
 
 	public bool IsUsing
 	{
@@ -33,7 +35,7 @@ public class Weapon : MonoBehaviour
 			}
 		}
 	}
-	public int ReadyForSwingSpeed
+	public float ReadyForSwingSpeed
 	{
 		set
 		{
@@ -47,7 +49,7 @@ public class Weapon : MonoBehaviour
 			}
 		}
 	}
-	public int SwingSpeed
+	public float SwingSpeed
 	{
 		set
 		{
@@ -75,7 +77,7 @@ public class Weapon : MonoBehaviour
 			}
 		}
 	}
-	public int EatSpeed
+	public float EatSpeed
 	{
 		set
 		{
@@ -108,34 +110,31 @@ public class Weapon : MonoBehaviour
 	{
 		isUsing = false;
 		animator = transform.root.GetComponent<Animator>();
+		player = GameObject.FindWithTag("Player");
+		useWeapon = player.GetComponent<UseWeapon>();
 	}
 	protected virtual void Update()
 	{
-		canAttack = animator.GetCurrentAnimatorStateInfo(1).IsName("Attack");
-		if (!canAttack)
+		isAttackAnimation = animator.GetCurrentAnimatorStateInfo(1).IsName("Attack");
+		if (!isAttackAnimation)
 		{
 			canHitEnemy = false;
 		}
 	}
 	public virtual void Use()
 	{
-		if (!IsIdleAnimation)
+		if (!useWeapon.IsIdleAnimation())
 		{
 			return;
 		}
 	}
 	protected virtual void DamageToEnemy(PlayerStatus enemyStatus)
 	{
-		if (canAttack && !canHitEnemy)
+		if (isAttackAnimation && !canHitEnemy)
 		{
 			Debug.Log("damage "+ damage + " to " + enemyStatus);
 			canHitEnemy = true;
 			enemyStatus.Damaged((int)damage);
 		}
-	}
-	//UpperBodyレイヤーがIdleアニメーション時にtrueを返す
-	protected bool IsIdleAnimation
-	{
-		get { return (animator.GetCurrentAnimatorStateInfo(1).IsName("Idle")); }
 	}
 }

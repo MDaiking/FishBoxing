@@ -33,16 +33,16 @@ public class EquipParam
 	public int damage;
 	public SizeEnum damageInUI;
 	[Tooltip("構えの体制に入るまでの速度")]
-	public int readyForSwingSpeed;
+	public float readyForSwingSpeed;
 	public SpeedEnum readyForSwingSpeedInUI;
 	[Tooltip("振る際の速度。この区間ダメージが入る")]
-	public int swingSpeed;
+	public float swingSpeed;
 	public SpeedEnum swingSpeedInUI;
 	[Tooltip("ダメージを与えた際のノックバックの強さ")]
 	public int knockbackPower;
 	public SizeEnum knockbackPowerInUI;
 	[Tooltip("食事時の速度")]
-	public int eatSpeed;
+	public float eatSpeed;
 	public SpeedEnum eatSpeedInUI;
 	[Tooltip("食事終了時の回復量")]
 	public int healAmount;

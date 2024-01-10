@@ -293,7 +293,7 @@ MonoBehaviour:
   backDeboost: 0.8
   crouchDeboost: 0.5
   jumpPower: 4
-  armAnimator: {fileID: 0}
+  verticalVelocity: 0
   cameraRoot: {fileID: 8836918144141399709}
 --- !u!114 &8803994303190309014
 MonoBehaviour:
@@ -307,14 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransitionStateInfoList:
-  - IsCrossFadeExit: 0
-    Layer: 1
-    OriginatingState: 2081823275
-    DestinationState: 1080829965
-    TransitionDuration: 0
-    TriggerNameHash: 93269881
-    TransitionIndex: 0
+  TransitionStateInfoList: []
   m_Animator: {fileID: 4692971407325732087}
 --- !u!114 &9094300264089976476
 MonoBehaviour:
