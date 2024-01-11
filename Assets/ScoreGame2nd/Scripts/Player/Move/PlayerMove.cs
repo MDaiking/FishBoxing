@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(PlayerInputList),typeof(CharacterController),typeof(Animator))]
+[RequireComponent(typeof(PlayerInputList), typeof(CharacterController), typeof(Animator))]
 [RequireComponent(typeof(UseWeapon))]
 
 public class PlayerMove : Unity.Netcode.NetworkBehaviour
 {
-	private PlayerInputList pil;
+	private PlayerInputList playerInputList;
 	[SerializeField]//移動速度
 	private float moveSpeed;
 	[SerializeField]//後退時の減衰割合
@@ -25,7 +25,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 
 	private UseWeapon useWeapon;
 	private Animator animator;
-	[SerializeField]
+	//[SerializeField]
 	//private Animator armAnimator;//一人称時のみ表示される腕のアニメーター
 
 	private float verticalVelocity;//垂直速度
@@ -37,7 +37,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 	{
 		if (IsOwner)
 		{
-			pil = GetComponent<PlayerInputList>();
+			playerInputList = GetComponent<PlayerInputList>();
 			controller = GetComponent<CharacterController>();
 			animator = GetComponent<Animator>();
 			useWeapon = GetComponent<UseWeapon>();
@@ -78,14 +78,14 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 	private void CalcMove()//動きを計算
 	{
 		velocity = Vector3.zero;
-		if (pil.MoveAxis.sqrMagnitude >= GameManager.threshold)//動いているときの処理
+		if (playerInputList.MoveAxis.sqrMagnitude >= GameManager.threshold)//動いているときの処理
 		{
-			velocity = (transform.forward * pil.MoveAxis.y + transform.right * pil.MoveAxis.x).normalized * moveSpeed;
+			velocity = (transform.forward * playerInputList.MoveAxis.y + transform.right * playerInputList.MoveAxis.x).normalized * moveSpeed;
 			if (isCrouch)//しゃがみ時、y以外を減速
 			{
 				velocity *= crouchDeboost;
 			}
-			if (pil.MoveAxis.y <= 0f)//後退時は減速
+			if (playerInputList.MoveAxis.y <= 0f)//後退時は減速
 			{
 				velocity *= backDeboost;
 			}
@@ -102,9 +102,13 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 	//アニメーションの遷移
 	private void MoveAnimation()
 	{
-		animator.SetFloat("ZAxis", pil.MoveAxis.y);
-		animator.SetFloat("XAxis", pil.MoveAxis.x);
+		animator.SetFloat("ZAxis", playerInputList.MoveAxis.y);
+		animator.SetFloat("XAxis", playerInputList.MoveAxis.x);
 		animator.SetBool("IsCrouch", isCrouch);
+
+		float weaponDeboost = useWeapon.IsIdleAnimation() ? 1.0f : readyToAttackDeboost;
+		animator.SetFloat("UsingWeapon", weaponDeboost);
+
 	}
 
 	private void JumpAndGravity()
@@ -116,7 +120,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 			{
 				verticalVelocity = -0.0f;
 			}
-			if (pil.IsJump)
+			if (playerInputList.IsJump)
 			{
 				verticalVelocity = jumpPower;
 			}
@@ -132,7 +136,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 	{
 		if (enableIsCrouch)
 		{
-			isCrouch = pil.IsCrouch;
+			isCrouch = playerInputList.IsCrouch;
 		}
 	}
 }

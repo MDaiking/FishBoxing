@@ -292,8 +292,9 @@ MonoBehaviour:
   moveSpeed: 3
   backDeboost: 0.8
   crouchDeboost: 0.5
+  readyToAttackDeboost: 0.25
   jumpPower: 4
-  verticalVelocity: 0
+  verticalVelocity: 0.25
   cameraRoot: {fileID: 8836918144141399709}
 --- !u!114 &8803994303190309014
 MonoBehaviour:
