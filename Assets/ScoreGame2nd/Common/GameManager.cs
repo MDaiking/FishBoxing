@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private float distance;
 	[SerializeField]
-	private Terrain terrain;
-	[SerializeField]
 	EquipLists equipLists;
 	private void Start()
 	{

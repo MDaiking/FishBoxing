@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WeaponType
+{
+	none,
+	melee,
+}
 public class Weapon : MonoBehaviour
 {
 	protected GameObject player;
@@ -128,6 +133,13 @@ public class Weapon : MonoBehaviour
 			return;
 		}
 	}
+	public virtual void Eat()
+	{
+		if(GetWeaponType() != WeaponType.melee)
+		{
+			return;
+		}
+	}
 	protected virtual void DamageToEnemy(PlayerStatus enemyStatus)
 	{
 		if (isAttackAnimation && !canHitEnemy)
@@ -136,5 +148,9 @@ public class Weapon : MonoBehaviour
 			canHitEnemy = true;
 			enemyStatus.Damaged((int)damage);
 		}
+	}
+	public virtual WeaponType GetWeaponType()
+	{
+		return WeaponType.none;
 	}
 }

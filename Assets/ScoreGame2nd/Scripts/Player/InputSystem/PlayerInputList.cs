@@ -8,21 +8,41 @@ public class PlayerInputList : MonoBehaviour//PIL = PlayerInputList
 	private PlayerInput playerInput;
 
 	private InputAction attack;
-	private bool canAttack;
-	private bool isAttackStart;
-	private bool isAttackEnd;
-
-	public bool CanAttack
+	private bool isAttack;
+	public bool IsAttack
 	{
-		get { return canAttack; }
+		get { return isAttack; }
 	}
+
+	private bool isAttackStart;
 	public bool IsAttackStart
 	{
 		get { return isAttackStart; }
 	}
+
+	private bool isAttackEnd;
 	public bool IsAttackEnd
 	{
 		get { return isAttackEnd; }
+	}
+
+	private InputAction eat;
+	private bool isEat;
+	public bool IsEat
+	{
+		get { return isEat; }
+	}
+
+	private bool isEatStart;
+	public bool IsEatStart
+	{
+		get { return isEatStart; }
+	}
+
+	private bool isEatEnd;
+	public bool IsEatEnd
+	{
+		get { return isEatEnd; }
 	}
 
 	private InputAction move;
@@ -70,6 +90,7 @@ public class PlayerInputList : MonoBehaviour//PIL = PlayerInputList
 		playerInput = GetComponent<PlayerInput>();
 
 		attack = playerInput.actions["Attack"];
+		eat = playerInput.actions["Eat"];
 		move = playerInput.actions["Move"];
 		jump = playerInput.actions["Jump"];
 		crouch = playerInput.actions["Crouch"];
@@ -83,9 +104,12 @@ public class PlayerInputList : MonoBehaviour//PIL = PlayerInputList
 	//InputSystem‚©‚çó‚¯æ‚é“ü—ÍM†‚ğXV
 	private void UpdateInput()
 	{
-		canAttack = (attack.ReadValue<float>() >= GameManager.threshold);
+		isAttack = (attack.ReadValue<float>() >= GameManager.threshold);
 		isAttackStart = attack.WasPressedThisFrame();
 		isAttackEnd = attack.WasReleasedThisFrame();
+		isEat = (eat.ReadValue<float>() >= GameManager.threshold);
+		isEatStart = eat.WasPressedThisFrame();
+		isEatEnd = eat.WasReleasedThisFrame();
 		moveAxis = move.ReadValue<Vector2>();
 		isJump = (jump.ReadValue<float>() >= GameManager.threshold);
 		isCrouch = (crouch.ReadValue<float>() >= GameManager.threshold);

@@ -7,8 +7,10 @@ public class MeleeWeapon : Weapon
 {
 	private MeshCollider weaponCollider;
 	private Timer timer;
+	private PlayerStatus playerStatus;
 	private PlayerInputList playerInputList;
 	private float readySpeedInAnimation;
+	private CheckEatingController checkEatingController;
 	protected override void Start()
 	{
 		base.Start();
@@ -23,6 +25,14 @@ public class MeleeWeapon : Weapon
 		if (playerInputList.IsAttackEnd)
 		{
 			FinishToUse();
+		}
+		if (playerInputList.IsEatEnd)
+		{
+			FinishToEat();
+		}
+		if (playerInputList.IsEat)
+		{
+			EatUpdate();
 		}
 	}
 	public void SetWeaponCollider(bool isAviable)
@@ -51,6 +61,28 @@ public class MeleeWeapon : Weapon
 		animator.SetBool("IsAttack", false);
 		animator.SetBool("CanAttack", canSwing);
 	}
+	public override void Eat()
+	{
+		base.Eat();
+		timer.StartTimer((float)eatSpeed);
+	}
+	private void EatUpdate()
+	{
+		float eatper = timer.GetTimePercent();
+		if(eatper >= 1.0f)
+		{
+			FinishToEat();
+		}
+		else
+		{
+			checkEatingController.SetFishMaskPercent(eatper);
+		}
+	}
+	private void FinishToEat()
+	{
+		timer.StopTimer();
+		playerStatus.Heal((int)healAmount);
+	}
 	private float ControlToReadyAnimationSpeed()
 	{
 		if (readySpeedInAnimation != -1.0f && readyForSwingSpeed != 0.0f)
@@ -78,5 +110,9 @@ public class MeleeWeapon : Weapon
 		}
 		Debug.LogError("The " + clipName + "is not found in layer " + layer + ".");
 		return -1.0f;
+	}
+	public override WeaponType GetWeaponType()
+	{
+		return WeaponType.melee;
 	}
 }

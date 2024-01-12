@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Block",
+                    "name": "Eat",
                     "type": "Button",
                     "id": "22b48647-e77c-4214-b7f2-b90e3781964a",
                     "expectedControlType": "Button",
@@ -137,7 +137,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyBoard&Mouse",
-                    "action": "Block",
+                    "action": "Eat",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
