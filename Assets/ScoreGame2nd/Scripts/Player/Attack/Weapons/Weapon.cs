@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour
 	private bool isAttackAnimation;
 	private bool canHitEnemy;
 	protected Animator animator;
+	protected Sprite image;
 	protected int? damage = null;
 	protected float? readyForSwingSpeed = null;
 	protected float? swingSpeed = null;
@@ -108,6 +109,24 @@ public class Weapon : MonoBehaviour
 			{
 				Debug.LogError("回復量を再定義することはできません");
 			}
+		}
+	}
+	public Sprite WeaponImage
+	{
+		set
+		{
+			if (image == null)
+			{
+				image = value;
+			}
+			else
+			{
+				Debug.LogError("画像は既にインポートされています。");
+			}
+		}
+		get
+		{
+			return image;
 		}
 	}
 

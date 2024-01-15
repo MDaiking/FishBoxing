@@ -10,7 +10,7 @@ public class MeleeWeapon : Weapon
 	private PlayerStatus playerStatus;
 	private PlayerInputList playerInputList;
 	private float readySpeedInAnimation;
-	private CheckEatingController checkEatingController;
+	private CheckEatingController checkEating;
 	protected override void Start()
 	{
 		base.Start();
@@ -18,6 +18,8 @@ public class MeleeWeapon : Weapon
 		timer = GetComponent<Timer>();
 		playerInputList = player.GetComponent<PlayerInputList>();
 		readySpeedInAnimation = GetAnimationLength(animator, 1, "ReadyToAttack");
+		checkEating = GameObject.FindWithTag("CheckEating").GetComponent<CheckEatingController>();
+		playerStatus = player.GetComponent<PlayerStatus>();
 	}
 	protected override void Update()
 	{
@@ -26,13 +28,13 @@ public class MeleeWeapon : Weapon
 		{
 			FinishToUse();
 		}
-		if (playerInputList.IsEatEnd)
-		{
-			FinishToEat();
-		}
 		if (playerInputList.IsEat)
 		{
 			EatUpdate();
+		}
+		if (playerInputList.IsEatEnd)
+		{
+			FinishToEat();
 		}
 	}
 	public void SetWeaponCollider(bool isAviable)
@@ -69,13 +71,13 @@ public class MeleeWeapon : Weapon
 	private void EatUpdate()
 	{
 		float eatper = timer.GetTimePercent();
-		if(eatper >= 1.0f)
+		if (eatper >= 1.0f)
 		{
 			FinishToEat();
 		}
 		else
 		{
-			checkEatingController.SetFishMaskPercent(eatper);
+			checkEating.SetFishMaskPercent(eatper);
 		}
 	}
 	private void FinishToEat()

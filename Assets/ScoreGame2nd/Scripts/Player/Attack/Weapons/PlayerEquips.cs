@@ -29,13 +29,14 @@ public class PlayerEquips : MonoBehaviour
     private EquipWeapons equipWeapons;
     [SerializeField]
     private EquipLists equipLists;
+    private CheckEatingController checkEating;
 
-    private float scroll;
     private PlayerInputList pil;
 
     private void Start()
     {
         pil = GetComponent<PlayerInputList>();
+        checkEating = GameObject.FindWithTag("CheckEating").GetComponent<CheckEatingController>();
         playerWeapons = equipWeapons.InitAviableEquips(playerEquips,nowEquip);
     }
     private void Update()
@@ -49,6 +50,7 @@ public class PlayerEquips : MonoBehaviour
 		{
             AddNowEquipNum(scrollCount);
             equipWeapons.ChangeWeapon(playerEquips[nowEquip]);
+            checkEating.SetEatingFishSprite(GetNowEquipParam());
 		}
 	}
     private void AddNowEquipNum(int addnum)//addnum分武器をずらす。マイナスにも対応
@@ -59,6 +61,10 @@ public class PlayerEquips : MonoBehaviour
         else nowEquip = n;
 	}
 
+    public EquipParam GetNowEquipParam()
+	{
+        return GetEquipParam(NowEquip);
+	}
     public EquipParam GetEquipParam(int equipNum)
     {
         return equipLists.equipParamList[equipNum];

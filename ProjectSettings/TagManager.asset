@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Weapon
   - Timer
+  - CheckEating
   layers:
   - Default
   - TransparentFX

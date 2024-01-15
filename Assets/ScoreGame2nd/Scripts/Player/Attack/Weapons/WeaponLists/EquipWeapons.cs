@@ -24,6 +24,7 @@ public class EquipWeapons : MonoBehaviour
 			weapon.SwingSpeed = equipParam.swingSpeed;
 			weapon.EatSpeed = equipParam.eatSpeed;
 			weapon.HealAmount = equipParam.healAmount;
+			weapon.WeaponImage = equipParam.equipImage;
 
 			weapons.Add(weapon);
 

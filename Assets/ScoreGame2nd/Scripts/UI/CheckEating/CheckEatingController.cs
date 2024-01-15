@@ -34,7 +34,7 @@ public class CheckEatingController : MonoBehaviour
 	{
 		maskPercent = percent;
 	}
-	private void SetFishSprite(EquipParam _equipParam)
+	public void SetEatingFishSprite(EquipParam _equipParam)
 	{
 		equipParam = _equipParam;
 		fishImage.sprite = equipParam.equipImage;
