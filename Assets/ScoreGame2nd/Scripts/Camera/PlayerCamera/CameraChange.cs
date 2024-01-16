@@ -54,29 +54,30 @@ public class CameraChange : Unity.Netcode.NetworkBehaviour
 		playerInput = GetComponent<PlayerInput>();
 		switchCamera = playerInput.actions["SwitchCamera"];
 		playerInvisible = GetComponent<PlayerInvisible>();
+		SetPriority(false);
 	}
 
 	private void Update()
 	{
 		if (IsOwner)
 		{
-			CheckSwitchCamera();
+			//CheckSwitchCamera();
 		}
 	}
-	private void CheckSwitchCamera()
+	private void CheckSwitchCamera()//FPSÇ∆TPSÇêÿÇËë÷Ç¶ÇÈÇ©Çäƒéã
 	{
-		if (IsCameraSwitch())
-		{
-			if (!doesAlreadyPush)
-			{
-				doesAlreadyPush = true;
-				SwitchPriority();
-			}
-		}
-		else
-		{
-			doesAlreadyPush = false;
-		}
+		//if (IsCameraSwitch())
+		//{
+		//	if (!doesAlreadyPush)
+		//	{
+		//		doesAlreadyPush = true;
+		//		SwitchPriority();
+		//	}
+		//}
+		//else
+		//{
+		//	doesAlreadyPush = false;
+		//}
 	}
 	private bool IsCameraSwitch()
 	{
@@ -86,6 +87,21 @@ public class CameraChange : Unity.Netcode.NetworkBehaviour
 	private void SwitchPriority()
 	{
 		if (fpsCamera.Priority == activePriority)
+		{
+			fpsCamera.Priority = inactivePriority;
+			tpsCamera.Priority = activePriority;
+			playerInvisible.SetInvisible(false);
+		}
+		else
+		{
+			fpsCamera.Priority = activePriority;
+			tpsCamera.Priority = inactivePriority;
+			playerInvisible.SetInvisible(true);
+		}
+	}
+	private void SetPriority(bool isFps)
+	{
+		if (!isFps)
 		{
 			fpsCamera.Priority = inactivePriority;
 			tpsCamera.Priority = activePriority;

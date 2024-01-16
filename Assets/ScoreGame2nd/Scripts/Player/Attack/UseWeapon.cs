@@ -9,18 +9,29 @@ public class UseWeapon : MonoBehaviour
 	private PlayerInputList playerInputList;
 	private Animator animator;
 	private PlayerEquips playerEquips;
+	private CursorController cursorController;
+	private bool canUse;
 
 	private void Start()
 	{
 		playerEquips = GetComponent<PlayerEquips>();
 		playerInputList = GetComponent<PlayerInputList>();
 		animator = GetComponent<Animator>();
+		cursorController = GameObject.FindWithTag("GameManager").GetComponent<CursorController>();
 	}
 	private void Update()
 	{
-		if (IsIdleAnimation() && playerInputList.IsAttackStart && playerEquips.GetNowWeapon() != null)
+		canUse = !cursorController.IsCursorShow;
+		if (canUse && IsIdleAnimation() && playerEquips.GetNowWeapon() != null)
 		{
-			playerEquips.GetNowWeapon().Use();
+			if (playerInputList.IsAttackStart)
+			{
+				playerEquips.GetNowWeapon().Use();
+			}
+			if (playerInputList.IsEatStart)
+			{
+				playerEquips.GetNowWeapon().Eat();
+			}
 		}
 	}
 	public bool IsIdleAnimation()

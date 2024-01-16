@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class CameraRotate : Unity.Netcode.NetworkBehaviour
 {
+	private bool canRotate;
+	private CursorController cursorController;
 	[SerializeField]
 	private float rotateSpeed;
 	public float RotateSpeed{
@@ -38,13 +40,15 @@ public class CameraRotate : Unity.Netcode.NetworkBehaviour
 			rotateCharacter = transform.localRotation;
 			playerInput = GetComponent<PlayerInput>();
 			rotate = playerInput.actions["Rotate"];
+			cursorController = GameObject.FindWithTag("GameManager").GetComponent<CursorController>();
 			//rotateText = GameObject.Find("rotate").GetComponent<RotateText>();
 		}
 	}
 
 	private void Update()
 	{
-		if (IsOwner)
+		canRotate = !cursorController.IsCursorShow;
+		if (canRotate && IsOwner)
 		{
 			rotateAxis = rotate.ReadValue<Vector2>();
 			CalcPitch();

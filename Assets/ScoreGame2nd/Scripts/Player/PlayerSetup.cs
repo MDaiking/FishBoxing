@@ -10,7 +10,6 @@ public class PlayerSetup : Unity.Netcode.NetworkBehaviour
 	private GameObject fpsCameraPrefab;
 	[SerializeField]
 	private GameObject tpsCameraPrefab;
-	[SerializeField]
 	private PlayerSetting playerSetting;
 
 	[SerializeField]

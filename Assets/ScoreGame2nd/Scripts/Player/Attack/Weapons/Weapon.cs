@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour
 	protected GameObject player;
 	private UseWeapon useWeapon;
 	protected bool isUsing;
+	protected bool isEating;
 	private bool isAttackAnimation;
 	private bool canHitEnemy;
 	protected Animator animator;
@@ -26,6 +27,10 @@ public class Weapon : MonoBehaviour
 	public bool IsUsing
 	{
 		get{ return isUsing; }
+	}
+	public bool IsEating
+	{
+		get { return isEating; }
 	}
 	public int Damage
 	{
@@ -151,6 +156,7 @@ public class Weapon : MonoBehaviour
 		{
 			return;
 		}
+		isUsing = true;
 	}
 	public virtual void Eat()
 	{
@@ -158,6 +164,7 @@ public class Weapon : MonoBehaviour
 		{
 			return;
 		}
+		isEating = true;
 	}
 	protected virtual void DamageToEnemy(PlayerStatus enemyStatus)
 	{

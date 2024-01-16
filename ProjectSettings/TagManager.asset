@@ -11,6 +11,7 @@ TagManager:
   - Weapon
   - Timer
   - CheckEating
+  - CheckAttacking
   layers:
   - Default
   - TransparentFX

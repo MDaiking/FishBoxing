@@ -294,7 +294,6 @@ MonoBehaviour:
   crouchDeboost: 0.5
   readyToAttackDeboost: 0.25
   jumpPower: 4
-  verticalVelocity: 0.25
   cameraRoot: {fileID: 8836918144141399709}
 --- !u!114 &8803994303190309014
 MonoBehaviour:
@@ -442,7 +441,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fpsCameraPrefab: {fileID: 3416601826469742948, guid: 9167097d92e99bc4682e830b8bdfd9c8, type: 3}
   tpsCameraPrefab: {fileID: 6331543043615147547, guid: 3a5def6da358ebb409def117b068388c, type: 3}
-  playerSetting: {fileID: 0}
   cameraRoot: {fileID: 8586638809419532140}
   cameraChange: {fileID: 0}
 --- !u!114 &2273443781029814021

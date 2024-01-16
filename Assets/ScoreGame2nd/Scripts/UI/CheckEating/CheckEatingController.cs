@@ -7,8 +7,11 @@ using UnityEngine.UI;
 public class CheckEatingController : MonoBehaviour
 {
 	RectTransform rectTransform;
-	private float defaultWeight;
 	private float maskPercent;
+	private Vector2 defaultSize;
+	private float width;
+	[SerializeField]
+	private float runningBackSpeed = 5f;
 	private EquipParam equipParam;
 	private Image fishImage;
 	private Image fishColor;
@@ -22,17 +25,26 @@ public class CheckEatingController : MonoBehaviour
 		Transform fishImageTransform = transform.GetChild(0);
 		fishImage = fishImageTransform.GetComponent<Image>();
 		fishColor = fishImageTransform.GetChild(0).GetComponent<Image>();
-
-		defaultWeight = rectTransform.rect.width;
+		defaultSize = rectTransform.sizeDelta;
+		maskPercent = 1.0f;
 	}
 	private void Update()
 	{
-		 
+		float targetWidth = defaultSize.x * maskPercent;
+		if (targetWidth - runningBackSpeed > width)
+		{
+			width += runningBackSpeed;
+		}
+		else
+		{
+			width = targetWidth;
+		}
+		rectTransform.sizeDelta = new Vector2(width, defaultSize.y);
 	}
 
 	public void SetFishMaskPercent(float percent)
 	{
-		maskPercent = percent;
+		maskPercent = 1.0f - percent;
 	}
 	public void SetEatingFishSprite(EquipParam _equipParam)
 	{
