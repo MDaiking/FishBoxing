@@ -45,6 +45,10 @@ public class PlayerEquips : MonoBehaviour
     }
     private void ScrollWeapon()//ホイール操作を読み取って武器をスクロールで変更させる
 	{
+        if(GetNowWeapon().IsUsing || GetNowWeapon().IsEating)
+		{
+            return;
+		}
         int scrollCount = -(int)pil.SwitchWeaponAxis / 120;
         if(scrollCount != 0)
 		{

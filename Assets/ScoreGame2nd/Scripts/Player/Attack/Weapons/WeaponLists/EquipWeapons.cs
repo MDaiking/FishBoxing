@@ -7,7 +7,7 @@ public class EquipWeapons : MonoBehaviour
 	[SerializeField]
 	private EquipLists equipLists;
 
-	private Quaternion defaultEquipRotation = new Quaternion(-0.707106769f, 0, 0, 0.707106769f);
+	private Quaternion defaultEquipRotation = new Quaternion(-0.683012724f, 0.183012694f, -0.183012694f, 0.683012724f);
 	public List<Weapon> InitAviableEquips(List<int> nowEquipList, int startEquip)
 	{
 		List<Weapon> weapons = new List<Weapon>();
