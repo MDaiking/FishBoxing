@@ -18,6 +18,12 @@ public class SystemInputList: MonoBehaviour
 	{
 		get { return isOptionStart; }
 	}
+	private InputAction anyKey;
+	private bool isAnyKey;
+	public bool IsAnyKey
+	{
+		get{ return isAnyKey; }
+	}
 
 
 	private void Start()
@@ -25,6 +31,7 @@ public class SystemInputList: MonoBehaviour
 		systemInput = GetComponent<PlayerInput>();
 
 		option = systemInput.actions["Option"];
+		anyKey = systemInput.actions["AnyKey"];
 	}
 	private void Update()
 	{
@@ -35,6 +42,7 @@ public class SystemInputList: MonoBehaviour
 	{
 		isOption = (option.ReadValue<float>() >= GameManager.threshold);
 		isOptionStart = option.WasPressedThisFrame();
+		isAnyKey = (anyKey.ReadValue<float>() >= GameManager.threshold);
 
 	}
 	public bool IsCurrentDeviceMouse

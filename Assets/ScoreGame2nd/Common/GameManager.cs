@@ -7,8 +7,6 @@ public class GameManager : MonoBehaviour
 	public const float threshold = 0.01f;//0‚©0ˆÈŠO‚©‚ð”»•Ê‚·‚é‚½‚ß‚Ì’è”BinputSystem‚Ìfloat->bool•ÏŠ·‚È‚Ç‚É
 
 	[SerializeField]
-	private float distance;
-	[SerializeField]
 	EquipLists equipLists;
 	private void Start()
 	{
