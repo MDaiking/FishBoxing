@@ -1,45 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(PlayerInputList))]
 
 public class PlayerEquips : MonoBehaviour
 {
     [SerializeField]
-    private int maxEquip = 3;
+    protected int maxEquip = 3;
     public int MaxEquip
 	{
         get{ return maxEquip; }
 	}
-    private int nowEquip = 0;
+    protected int nowEquip = 0;
     public int NowEquip
     {
         get { return nowEquip; }
     }
     [SerializeField]
-    private List<int> playerEquips = new List<int>();
-    private List<Weapon> playerWeapons = new List<Weapon>();
+    protected List<int> playerEquips = new List<int>();
+    protected List<Weapon> playerWeapons = new List<Weapon>();
     public List<Weapon> PlayerWeapons
 	{
         get{ return playerWeapons; }
 	}
+
     [SerializeField]
-    private PlayerStatus playerStatus;
+    protected EquipWeapons equipWeapons;
     [SerializeField]
-    private EquipWeapons equipWeapons;
-    [SerializeField]
-    private EquipLists equipLists;
+    protected EquipLists equipLists;
+    private PlayerInputList playerInputList;
+
     private CheckEatingController checkEating;
 
-    private PlayerInputList pil;
-
-    private void Start()
+    protected virtual void Start()
     {
-        pil = GetComponent<PlayerInputList>();
+        playerInputList = GetComponent<PlayerInputList>();
+        if(playerInputList == null)
+		{
+            Debug.LogError("PlayerInputListがコンポーネントされていません");
+		}
         checkEating = GameObject.FindWithTag("CheckEating").GetComponent<CheckEatingController>();
         playerWeapons = equipWeapons.InitAviableEquips(playerEquips,nowEquip);
     }
-    private void Update()
+    protected virtual void Update()
     {
         ScrollWeapon();
     }
@@ -49,7 +51,7 @@ public class PlayerEquips : MonoBehaviour
 		{
             return;
 		}
-        int scrollCount = -(int)pil.SwitchWeaponAxis / 120;
+        int scrollCount = -(int)playerInputList.SwitchWeaponAxis / 120;
         if(scrollCount != 0)
 		{
             AddNowEquipNum(scrollCount);

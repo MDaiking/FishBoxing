@@ -17,11 +17,14 @@ public class MeleeWeapon : Weapon
 		base.Start();
 		weaponCollider = GetComponent<MeshCollider>();
 		timer = GetComponent<Timer>();
-		playerInputList = player.GetComponent<PlayerInputList>();
+		if (player != null)
+		{
+			playerInputList = player.GetComponent<PlayerInputList>();
+			playerStatus = player.GetComponent<PlayerStatus>();
+		}
 		readySpeedInAnimation = GetAnimationLength(animator, 1, "ReadyToAttack");
 		checkEating = GameObject.FindWithTag("CheckEating").GetComponent<CheckEatingController>();
 		checkAttacking = GameObject.FindWithTag("CheckAttacking").GetComponent<CheckAttackingController>();
-		playerStatus = player.GetComponent<PlayerStatus>();
 	}
 	protected override void Update()
 	{

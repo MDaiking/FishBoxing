@@ -26,7 +26,7 @@ public class Weapon : MonoBehaviour
 
 	public bool IsUsing
 	{
-		get{ return isUsing; }
+		get { return isUsing; }
 	}
 	public bool IsEating
 	{
@@ -140,7 +140,10 @@ public class Weapon : MonoBehaviour
 		isUsing = false;
 		animator = transform.root.GetComponent<Animator>();
 		player = GameObject.FindWithTag("Player");
-		useWeapon = player.GetComponent<UseWeapon>();
+		if (player != null)
+		{
+			useWeapon = player.GetComponent<UseWeapon>();
+		}
 	}
 	protected virtual void Update()
 	{
@@ -160,7 +163,7 @@ public class Weapon : MonoBehaviour
 	}
 	public virtual void Eat()
 	{
-		if(GetWeaponType() != WeaponType.melee)
+		if (GetWeaponType() != WeaponType.melee)
 		{
 			return;
 		}
@@ -170,7 +173,7 @@ public class Weapon : MonoBehaviour
 	{
 		if (isAttackAnimation && !canHitEnemy)
 		{
-			Debug.Log("damage "+ damage + " to " + enemyStatus);
+			Debug.Log("damage " + damage + " to " + enemyStatus);
 			canHitEnemy = true;
 			enemyStatus.Damaged((int)damage);
 		}
