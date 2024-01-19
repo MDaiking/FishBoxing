@@ -8,6 +8,7 @@ public class ButtonInUI : MonoBehaviour
 {
 	private EventTrigger eventTrigger;
 	protected bool isSelected;
+	private GameObject thisGameObject;
 
 	protected void AddEventTrigger(Action enterAction, Action exitAction, Action clickAction)
 	{

@@ -30,7 +30,7 @@ MonoBehaviour:
     eatSpeedInUI: 2
     healAmount: 0
     healAmountInUI: 2
-    offset: {x: -0.179, y: 0.018, z: 0.062}
+    offset: {x: -0.17, y: 0.1, z: 0.06}
   - equipObject: {fileID: 7875160510175550214, guid: f775d92b3ff22174ca485d0d2d971f92, type: 3}
     equipImage: {fileID: 21300000, guid: 1bcaf2be6ea80484fb298c9ff6cb8b5b, type: 3}
     ruby: "\u3055\u3051"
@@ -48,7 +48,7 @@ MonoBehaviour:
     eatSpeedInUI: 1
     healAmount: 0
     healAmountInUI: 3
-    offset: {x: -0.369, y: 0.005, z: 0.024}
+    offset: {x: -0.25, y: 0.2, z: 0}
   - equipObject: {fileID: 737533056802261942, guid: ef2a4410bd5270e44b31111d8e913e0c, type: 3}
     equipImage: {fileID: 21300000, guid: 2e204e7175a6be04ea0e09a49f57a4c9, type: 3}
     ruby: "\u3055\u3093\u307E"
@@ -66,7 +66,7 @@ MonoBehaviour:
     eatSpeedInUI: 3
     healAmount: 0
     healAmountInUI: 1
-    offset: {x: -0.35, y: 0.035, z: -0.028}
+    offset: {x: -0.26, y: 0.179, z: -0.026}
   - equipObject: {fileID: 3891397602343789287, guid: 64f2e13645d680944876400f37fedb16, type: 3}
     equipImage: {fileID: 21300000, guid: 7dceada4b4316984bbe5b966c98f001e, type: 3}
     ruby: "\u305F\u3044"
@@ -84,13 +84,13 @@ MonoBehaviour:
     eatSpeedInUI: 1
     healAmount: 0
     healAmountInUI: 3
-    offset: {x: -0.378, y: 0.023, z: 0.034}
+    offset: {x: -0.32, y: 0.22, z: 0.02}
   - equipObject: {fileID: 2128577369806575190, guid: 5931c61373125c746a63de40d36c1a4d, type: 3}
     equipImage: {fileID: 21300000, guid: f628316843ed70d448e688dd7afac93e, type: 3}
     ruby: "\u3055\u3081"
     name: "\u9BAB"
     explanation: "\u6355\u98DF\u8005\u306B\u3075\u3055\u308F\u3057\u3044\u5927\u304D\u306A\u8EAB\u4F53\u3068\u5F37\u976D\u306A\u6B6F\u3002\u4E00\u756A\u5927\u304D\u306A\u9B5A\u306F\u30B8\u30F3\u30D9\u30A4\u30B6\u30E1\u3002\n\u632F\u308B\u901F\u5EA6\u3082\u98DF\u3079\u308B\u306E\u3082\u5927\u5909\u3060\u304C\u305D\u306E\u898B\u8FD4\u308A\u306F\u5927\u304D\u3044"
-    damage: 30
+    damage: 80
     damageInUI: 4
     readyForSwingSpeed: 2
     readyForSwingSpeedInUI: 0
@@ -102,4 +102,4 @@ MonoBehaviour:
     eatSpeedInUI: 0
     healAmount: 0
     healAmountInUI: 4
-    offset: {x: -1.774, y: 0.073, z: 0.372}
+    offset: {x: -1.6, y: 1, z: 0.37}

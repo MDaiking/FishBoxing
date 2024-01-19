@@ -35,7 +35,7 @@ ModelImporter:
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 17
+      lastFrame: 2
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -63,7 +63,7 @@ ModelImporter:
       name: Swing
       takeName: mixamo.com
       internalID: -4469183485442372851
-      firstFrame: 17
+      firstFrame: 2
       lastFrame: 61
       wrapMode: 0
       orientationOffsetY: 0
