@@ -7,6 +7,10 @@ public class Timer : MonoBehaviour
 	private int time;
 	private int timer;
 	private bool isActivated;
+	public bool IsActivated
+	{
+		get { return isActivated; }
+	}
 	public float GetTimePercent()
 	{
 		return (float)time / timer;

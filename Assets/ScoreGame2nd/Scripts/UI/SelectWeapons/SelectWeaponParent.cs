@@ -6,26 +6,33 @@ using DG.Tweening;
 
 public class SelectWeaponParent : MonoBehaviour
 {
-	[SerializeField] CursorController cursorController;
-	[SerializeField] float moveTimeToShow;
-	[SerializeField] float moveTimeToHide;
-	RectTransform rectTransform;
+	[SerializeField]
+	private CursorController cursorController;
+	[SerializeField]
+	private float moveTimeToShow;
+	[SerializeField]
+	private float moveTimeToHide;
+	private RectTransform rectTransform;
 
-	bool testBool;
+	private bool isShow = false;
+	public bool IsShow
+	{
+		get { return isShow; }
+	}
+
 	bool canMove;
 	private void Start()
 	{
-		testBool = false;
 		canMove = true;
 		rectTransform = GetComponent<RectTransform>();
-		InstantToggleUI(testBool);
+		InstantToggleUI(false);
 	}
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.B) && canMove)
 		{
-			testBool = !testBool;
-			ToggleUI(testBool);
+			isShow = !isShow;
+			ToggleUI(isShow);
 		}
 	}
 	private void ToggleUI(bool value)
@@ -35,15 +42,15 @@ public class SelectWeaponParent : MonoBehaviour
 			SetActiveAllChildren(true);
 			cursorController.IsCursorShow = true;
 			rectTransform.DOLocalMove(new Vector3(0.0f, 0.0f, 0.0f), moveTimeToShow).SetEase(Ease.OutBounce)
-				.OnStart(()=>{ canMove = false; })
-				.OnComplete(()=> { canMove = true; });
+				.OnStart(() => { canMove = false; })
+				.OnComplete(() => { canMove = true; });
 		}
 		else
 		{
 			int screenWidth = Screen.height;
 			cursorController.IsCursorShow = false;
 			rectTransform.DOLocalMove(new Vector3(0.0f, screenWidth, 0.0f), moveTimeToHide).SetEase(Ease.OutQuad)
-				.OnStart(()=>{ canMove = false; })
+				.OnStart(() => { canMove = false; })
 				.OnComplete(() => { SetActiveAllChildren(false); canMove = true; });
 		}
 	}
