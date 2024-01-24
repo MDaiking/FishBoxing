@@ -9,12 +9,14 @@ public class MeleeWeapon : Weapon
 	private Timer timer;
 	private PlayerStatus playerStatus;
 	private PlayerInputList playerInputList;
-	private float readySpeedInAnimation;
+	private float readyToAttackSpeedInAnimation;
+	private float eatSpeedInAnimation;
 	private CheckAttackingController checkAttacking;
 	private CheckEatingController checkEating;
-	protected override void Start()
+
+	public override void Setup()
 	{
-		base.Start();
+		base.Setup();
 		weaponCollider = GetComponent<MeshCollider>();
 		timer = GetComponent<Timer>();
 		if (player != null)
@@ -22,7 +24,8 @@ public class MeleeWeapon : Weapon
 			playerInputList = player.GetComponent<PlayerInputList>();
 			playerStatus = player.GetComponent<PlayerStatus>();
 		}
-		readySpeedInAnimation = GetAnimationLength(animator, 1, "ReadyToAttack");
+		readyToAttackSpeedInAnimation = GetAnimationLength(animator, 1, "ReadyToAttack");
+		eatSpeedInAnimation = GetAnimationLength(animator, 1, "Eating");
 		checkEating = GameObject.FindWithTag("CheckEating").GetComponent<CheckEatingController>();
 		checkAttacking = GameObject.FindWithTag("CheckAttacking").GetComponent<CheckAttackingController>();
 	}
@@ -63,8 +66,9 @@ public class MeleeWeapon : Weapon
 	public override void Use()
 	{
 		base.Use();
-		float readySpeed = ControlToReadyAnimationSpeed();
-		animator.SetFloat("ReadySpeed", readySpeed);
+		SetWeaponSize((float)atAttackSize, 1.0f);
+		float readySpeed = ReadyToAttackAnimationSpeed();
+		animator.SetFloat("ReadyToAttackSpeed", readySpeed);
 		animator.SetBool("IsAttack", true);
 		animator.SetBool("CanAttack", false);
 		checkAttacking.SetActive();
@@ -81,11 +85,18 @@ public class MeleeWeapon : Weapon
 		animator.SetBool("CanAttack", canSwing);
 		checkAttacking.SetInactive();
 		isUsing = false;
+		if (canSwing)
+		{
+
+		}
 	}
 	public override void Eat()
 	{
 		base.Eat();
 		timer.StartTimer((float)eatSpeed);
+		float _eatingSpeed = EatAnimationSpeed();
+		animator.SetFloat("EatingSpeed", _eatingSpeed);
+		animator.SetBool("IsEating", true);
 	}
 	private void EatUpdate()
 	{
@@ -102,6 +113,7 @@ public class MeleeWeapon : Weapon
 	private void FinishToEat(bool isFinished)
 	{
 		timer.StopTimer();
+		animator.SetBool("IsEating", false);
 		if (isFinished)
 		{
 			playerStatus.Heal((int)healAmount);
@@ -113,11 +125,23 @@ public class MeleeWeapon : Weapon
 		}
 		isEating = false;
 	}
-	private float ControlToReadyAnimationSpeed()
+
+	private float ReadyToAttackAnimationSpeed()
 	{
-		if (readySpeedInAnimation != -1.0f && readyForSwingSpeed != 0.0f)
+		if (readyToAttackSpeedInAnimation != -1.0f && readyForSwingSpeed != 0.0f)
 		{
-			return (float)readySpeedInAnimation / (float)readyForSwingSpeed;
+			return (float)readyToAttackSpeedInAnimation / (float)readyForSwingSpeed;
+		}
+		else
+		{
+			return 1.0f;
+		}
+	}
+	private float EatAnimationSpeed()
+	{
+		if (eatSpeedInAnimation != -1.0f && eatSpeed != 0.0f)
+		{
+			return (float)eatSpeedInAnimation / (float)eatSpeed;
 		}
 		else
 		{

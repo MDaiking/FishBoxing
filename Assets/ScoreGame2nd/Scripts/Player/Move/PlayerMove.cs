@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(PlayerInputList), typeof(CharacterController), typeof(Animator))]
+[RequireComponent(typeof(PlayerInputList), typeof(Rigidbody), typeof(Animator))]
 [RequireComponent(typeof(UseWeapon))]
 
 public class PlayerMove : Unity.Netcode.NetworkBehaviour
@@ -20,7 +20,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 	[SerializeField]
 	private float jumpPower = 5.0f;
 
-	private CharacterController controller;
+	private Rigidbody rb;
 	private Vector3 velocity;
 
 	private UseWeapon useWeapon;
@@ -38,7 +38,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 		if (IsOwner)
 		{
 			playerInputList = GetComponent<PlayerInputList>();
-			controller = GetComponent<CharacterController>();
+			rb = GetComponent<Rigidbody>();
 			animator = GetComponent<Animator>();
 			useWeapon = GetComponent<UseWeapon>();
 			enableIsCrouch = true;
@@ -67,7 +67,11 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 	{
 		if (IsOwner)
 		{
-			controller.Move(velocity * Time.deltaTime + new Vector3(0f, verticalVelocity, 0f) * Time.deltaTime);
+			rb.velocity = (velocity + new Vector3(0f, verticalVelocity, 0f));
+			if (Input.GetKeyDown(KeyCode.K))
+			{
+				rb.velocity += new Vector3(50.0f,0.0f,0.0f);
+			}
 		}
 	}
 	private void CameraRootMove()
@@ -94,7 +98,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 				velocity *= readyToAttackDeboost;
 			}
 		}
-		JumpAndGravity();
+		Gravity();
 
 		//velocity = new Vector3(Mathf.Round(velocity.x), Mathf.Round(velocity.y), Mathf.Round(velocity.z));
 	}
@@ -111,26 +115,9 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 
 	}
 
-	private void JumpAndGravity()
+	private void Gravity()
 	{
-		if (controller.isGrounded)//’n–Ê‚É‚Â‚¢‚Ä‚¢‚é‚Æ‚«
-		{
-			enableIsCrouch = true;//‚µ‚á‚ª‚Ý‰Â”\
-			if (verticalVelocity < 0.0f)
-			{
-				verticalVelocity = -0.0f;
-			}
-			if (playerInputList.IsJump)
-			{
-				verticalVelocity = jumpPower;
-			}
-		}
-		else
-		{
-			enableIsCrouch = false;//‚µ‚á‚ª‚Ý•s‰Â
-
-		}
-		verticalVelocity += Physics.gravity.y * Time.deltaTime;
+		verticalVelocity = rb.velocity.y;
 	}
 	private void ToggleCrouch()
 	{

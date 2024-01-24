@@ -25,7 +25,9 @@ public class EquipWeapons : MonoBehaviour
 			weapon.EatSpeed = equipParam.eatSpeed;
 			weapon.HealAmount = equipParam.healAmount;
 			weapon.WeaponImage = equipParam.equipImage;
-
+			weapon.DefaultSize = equipParam.defaultSize;
+			weapon.AtAttackSize = equipParam.atAttackSize;
+			weapon.Setup();
 			weapons.Add(weapon);
 
 		}
@@ -36,8 +38,7 @@ public class EquipWeapons : MonoBehaviour
 	{
 		for (int i = 0; i < transform.childCount; ++i)
 		{
-			if (i == equipNum) transform.GetChild(i).gameObject.SetActive(true);
-			else transform.GetChild(i).gameObject.SetActive(false);
+			transform.GetChild(i).gameObject.SetActive(i == equipNum);
 		}
 	}
 }

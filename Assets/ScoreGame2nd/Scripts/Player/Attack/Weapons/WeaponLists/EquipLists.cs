@@ -29,6 +29,10 @@ public class EquipParam
 	public string name;
 	[TextArea, Tooltip("説明文")]
 	public string explanation;
+	[Header("SE")]
+	public AudioClip swingSound;
+	public AudioClip hitSound;
+	public AudioClip eatSound;
 	[Header("ステータス")]
 	public int damage;
 	public SizeEnum damageInUI;
@@ -47,5 +51,8 @@ public class EquipParam
 	[Tooltip("食事終了時の回復量")]
 	public int healAmount;
 	public SizeEnum healAmountInUI;
+	[Header("その他設定")]
+	public float defaultSize = 1.0f;
+	public float atAttackSize = 1.0f;
 	public Vector3 offset;
 }

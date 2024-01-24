@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public enum WeaponType
 {
 	none,
 	melee,
 }
+[RequireComponent(typeof(AudioSource))]
 public class Weapon : MonoBehaviour
 {
 	protected GameObject player;
-	private UseWeapon useWeapon;
+	protected UseWeapon useWeapon;
 	protected bool isUsing;
 	protected bool isEating;
 	private bool isAttackAnimation;
@@ -23,6 +25,17 @@ public class Weapon : MonoBehaviour
 	protected int? knockbackPower = null;
 	protected float? eatSpeed = null;
 	protected int? healAmount = null;
+	protected float? defaultSize = null;
+	protected float? atAttackSize = null;
+	private Transform rootTransform;
+	protected bool isDefaultSize;
+	protected bool isBackingToDefaultSize;
+	protected Tween changeSizeTween;
+
+	protected AudioSource audioSource;
+	protected AudioClip swingSound;
+	protected AudioClip hitSound;
+	protected AudioClip eatSound;
 
 	public bool IsUsing
 	{
@@ -116,6 +129,34 @@ public class Weapon : MonoBehaviour
 			}
 		}
 	}
+	public float DefaultSize
+	{
+		set
+		{
+			if (defaultSize == null)
+			{
+				defaultSize = value;
+			}
+			else
+			{
+				Debug.LogError("デフォルトのサイズを再定義することはできません");
+			}
+		}
+	}
+	public float AtAttackSize
+	{
+		set
+		{
+			if (atAttackSize == null)
+			{
+				atAttackSize = value;
+			}
+			else
+			{
+				Debug.LogError("攻撃時のサイズを再定義することはできません");
+			}
+		}
+	}
 	public Sprite WeaponImage
 	{
 		set
@@ -135,11 +176,15 @@ public class Weapon : MonoBehaviour
 		}
 	}
 
-	protected virtual void Start()
+	public virtual void Setup()
 	{
 		isUsing = false;
+		isDefaultSize = false;
+		isBackingToDefaultSize = false;
 		animator = transform.root.GetComponent<Animator>();
 		player = GameObject.FindWithTag("Player");
+		rootTransform = transform.parent;
+		audioSource = GetComponent<AudioSource>();
 		if (player != null)
 		{
 			useWeapon = player.GetComponent<UseWeapon>();
@@ -152,10 +197,14 @@ public class Weapon : MonoBehaviour
 		{
 			canHitEnemy = false;
 		}
+		if (!isDefaultSize && useWeapon.IsIdleAnimation())
+		{
+			SetDefaultWeaponSize(0.2f);
+		}
 	}
 	public virtual void Use()
 	{
-		if (!useWeapon.IsIdleAnimation())
+		if (!GetCanActivateWeapon())
 		{
 			return;
 		}
@@ -177,6 +226,46 @@ public class Weapon : MonoBehaviour
 			canHitEnemy = true;
 			enemyStatus.Damaged((int)damage);
 		}
+	}
+	protected void SetWeaponSize(float size, float setTime)
+	{
+		changeSizeTween = rootTransform.DOScale(new Vector3(size, size, size), setTime)
+			.OnStart(() => { if (size == defaultSize) { isBackingToDefaultSize = true; } })
+			.OnComplete(() =>
+			{
+				isDefaultSize = (size == defaultSize);
+				isBackingToDefaultSize = false;
+			});
+	}
+	protected void SetWeaponSize(float? size, float setTime)
+	{
+		SetWeaponSize((float)size, setTime);
+	}
+	public void SetDefaultWeaponSize(float setTime)
+	{
+		if (setTime == 0.0f)
+		{
+			float _defaultSize = (float)defaultSize;
+			rootTransform.localScale = new Vector3(_defaultSize, _defaultSize, _defaultSize);
+			isDefaultSize = true;
+			isBackingToDefaultSize = false;
+
+		}
+		else
+		{
+			float _defaultSize = (float)defaultSize;
+			changeSizeTween = rootTransform.DOScale(new Vector3(_defaultSize, _defaultSize, _defaultSize), setTime)
+				.OnStart(() => { isBackingToDefaultSize = true; })
+				.OnComplete(() =>
+				{
+					isDefaultSize = true;
+					isBackingToDefaultSize = false;
+				});
+		}
+	}
+	public bool GetCanActivateWeapon()
+	{
+		return (useWeapon.IsIdleAnimation() && !isBackingToDefaultSize);
 	}
 	public virtual WeaponType GetWeaponType()
 	{

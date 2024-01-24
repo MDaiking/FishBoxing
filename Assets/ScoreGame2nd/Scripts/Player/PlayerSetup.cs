@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Networking;
 
 namespace Unity.Netcode.Samples.APIDiorama.RPC
 {
@@ -17,38 +19,30 @@ namespace Unity.Netcode.Samples.APIDiorama.RPC
 
 		[SerializeField]
 		private GameObject cameraRoot;
-
-		void Start()
+		
+		private Vector3 GetSpawnPosition()
 		{
-			NetworkManager.ConnectionApprovalCallback = ConnectionApprovalCallback;
+			return new Vector3(0.0f, 5.0f, 0.0f);
 		}
-
-		void ConnectionApprovalCallback(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
-		{
-			/* you can use this method in your project to customize one of more aspects of the player
-             * (I.E: its start position, its character) and to perform additional validation checks. */
-			response.Approved = true;
-			response.CreatePlayerObject = true;
-			response.Position = GetPlayerSpawnPosition();
-		}
-
-		Vector3 GetPlayerSpawnPosition()
-		{
-			/*
-             * this is just an example, and you change this implementation to make players spawn on specific spawn points
-             * depending on other factors (I.E: player's team)
-             */
-			return new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100));
-		}
+	
 		public override void OnNetworkSpawn()
 		{
+			base.OnNetworkSpawn();
 			I = this.gameObject;
-			CurrentLayerSetup();
+			transform.position = GetSpawnPosition();
+			Debug.Log("position: " + transform.position);
 			if (IsOwner)
 			{
 				SettingSetup();
 				CameraSetup();
-				transform.position = new Vector3(0.0f, 6.0f, 30.0f);
+			}
+		}
+		private void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.LeftArrow))
+			{
+				transform.position = new Vector3(0.0f, 1000.0f, 0.0f);
+				Debug.Log("unchi!!!!!!!!!!!");
 			}
 		}
 		private void CameraSetup()
