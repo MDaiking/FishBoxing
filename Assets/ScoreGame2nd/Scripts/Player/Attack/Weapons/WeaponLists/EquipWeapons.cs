@@ -22,6 +22,8 @@ public class EquipWeapons : MonoBehaviour
 			weapon.Damage = equipParam.damage;
 			weapon.ReadyForSwingSpeed = equipParam.readyForSwingSpeed;
 			weapon.SwingSpeed = equipParam.swingSpeed;
+			weapon.KnockbackPower = equipParam.knockbackPower;
+			weapon.KnockbackResistance = equipParam.knockbackResistance;
 			weapon.EatSpeed = equipParam.eatSpeed;
 			weapon.HealAmount = equipParam.healAmount;
 			weapon.WeaponImage = equipParam.equipImage;

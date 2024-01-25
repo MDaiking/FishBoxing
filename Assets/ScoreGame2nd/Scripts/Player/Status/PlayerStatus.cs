@@ -11,6 +11,8 @@ public class PlayerStatus : MonoBehaviour
 	[SerializeField]
 	private HPBar hpbar;
 
+	private PlayerMove playerMove;
+
 	public int HP
 	{
 		get { return hp; }
@@ -29,7 +31,12 @@ public class PlayerStatus : MonoBehaviour
 	virtual protected void Start()
 	{
 		maxhp = hp;
-		if (hpbar == null) hpbar = GameObject.FindWithTag("HPBar").GetComponent<HPBar>();
+		if (hpbar == null)
+		{
+			hpbar = GameObject.FindWithTag("HPBar").GetComponent<HPBar>();
+		}
+		playerMove = GetComponent<PlayerMove>();
+
 	}
 	virtual protected void Update()
 	{
@@ -42,7 +49,7 @@ public class PlayerStatus : MonoBehaviour
 
 	public void Heal(int healAmount)
 	{
-		if(hp + healAmount >= maxhp)
+		if (hp + healAmount >= maxhp)
 		{
 			hp = maxhp;
 		}
@@ -53,7 +60,7 @@ public class PlayerStatus : MonoBehaviour
 	}
 	virtual public void Damaged(int damage)
 	{
-		if(hp - damage <= 0)
+		if (hp - damage <= 0)
 		{
 			hp = 0;
 			Death();

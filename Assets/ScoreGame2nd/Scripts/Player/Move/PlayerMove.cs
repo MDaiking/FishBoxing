@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(PlayerInputList), typeof(Rigidbody), typeof(Animator))]
-[RequireComponent(typeof(UseWeapon))]
+[RequireComponent(typeof(UseWeapon),typeof(PlayerKnockback))]
 
 public class PlayerMove : Unity.Netcode.NetworkBehaviour
 {
@@ -27,6 +27,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 	private Animator animator;
 	//[SerializeField]
 	//private Animator armAnimator;//一人称時のみ表示される腕のアニメーター
+	private PlayerKnockback playerKnockback;
 
 	private float verticalVelocity;//垂直速度
 
@@ -41,6 +42,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 			rb = GetComponent<Rigidbody>();
 			animator = GetComponent<Animator>();
 			useWeapon = GetComponent<UseWeapon>();
+			playerKnockback = GetComponent<PlayerKnockback>();
 			enableIsCrouch = true;
 			isCrouch = false;
 		}
@@ -56,6 +58,11 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 			MoveAnimation();
 			CameraRootMove();
 		}
+		if (Input.GetKeyDown(KeyCode.K))
+		{
+			Debug.Log("knockback");
+			playerKnockback.SetKnockback(new Vector3(1.0f, 1000.0f, 0.0f), 10.0f, 10.0f);
+		}
 	}
 	[Unity.Netcode.ServerRpc]
 	private void SetMoveInputServerRpc(Vector3 _velocity, float _verticalVelocity)
@@ -67,11 +74,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 	{
 		if (IsOwner)
 		{
-			rb.velocity = (velocity + new Vector3(0f, verticalVelocity, 0f));
-			if (Input.GetKeyDown(KeyCode.K))
-			{
-				rb.velocity += new Vector3(50.0f,0.0f,0.0f);
-			}
+			rb.velocity = (velocity + new Vector3(0f, verticalVelocity, 0f) + playerKnockback.CalcKnockback());
 		}
 	}
 	private void CameraRootMove()

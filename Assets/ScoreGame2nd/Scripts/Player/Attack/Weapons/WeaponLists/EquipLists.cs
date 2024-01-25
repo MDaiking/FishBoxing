@@ -43,7 +43,8 @@ public class EquipParam
 	public float swingSpeed;
 	public SpeedEnum swingSpeedInUI;
 	[Tooltip("ダメージを与えた際のノックバックの強さ")]
-	public int knockbackPower;
+	public float knockbackPower;
+	public float knockbackResistance;
 	public SizeEnum knockbackPowerInUI;
 	[Tooltip("食事時の速度")]
 	public float eatSpeed;

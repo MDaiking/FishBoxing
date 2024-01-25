@@ -6,6 +6,7 @@ using UnityEngine;
 public class MeleeWeapon : Weapon
 {
 	private MeshCollider weaponCollider;
+
 	private Timer timer;
 	private PlayerStatus playerStatus;
 	private PlayerInputList playerInputList;
@@ -60,7 +61,7 @@ public class MeleeWeapon : Weapon
 	{
 		if (collider.tag == "Enemy")
 		{
-			DamageToEnemy(collider.GetComponent<PlayerStatus>());
+			DamageToEnemy(collider.gameObject);
 		}
 	}
 	public override void Use()
