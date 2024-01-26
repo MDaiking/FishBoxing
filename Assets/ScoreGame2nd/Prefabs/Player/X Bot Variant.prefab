@@ -204,6 +204,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6690838cf2edf37468b7bdafc10305f9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5703100821607212803}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6690838cf2edf37468b7bdafc10305f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5444941993647130391}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6690838cf2edf37468b7bdafc10305f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5718026914444701384}
   m_SourcePrefab: {fileID: 100100000, guid: 6690838cf2edf37468b7bdafc10305f9, type: 3}
 --- !u!4 &7195951087980418536 stripped
 Transform:
@@ -270,6 +276,7 @@ MonoBehaviour:
   backDeboost: 0.8
   crouchDeboost: 0.5
   readyToAttackDeboost: 0.25
+  crouchResistance: 2
   jumpPower: 4
   cameraRoot: {fileID: 8836918144141399709}
 --- !u!114 &8803994303190309014
@@ -513,6 +520,31 @@ CapsuleCollider:
   m_Height: 1.83
   m_Direction: 1
   m_Center: {x: 0, y: 0.89, z: 0}
+--- !u!114 &5444941993647130391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8550614373256550257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac033cc251f9ba94ab2e40d407cb23b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crouchResistance: 2
+--- !u!114 &5718026914444701384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8550614373256550257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d332c9cc93db91941afc6161b970b87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &9070868488611827147 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6690838cf2edf37468b7bdafc10305f9, type: 3}

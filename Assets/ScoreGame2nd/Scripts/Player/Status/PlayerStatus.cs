@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[RequireComponent(typeof(PlayerDeath))]
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerStatus : MonoBehaviour
 	protected int hp;
 	protected int maxhp;
 
+	PlayerDeath playerDeath;
 	[SerializeField]
 	private HPBar hpbar;
 
@@ -36,6 +38,7 @@ public class PlayerStatus : MonoBehaviour
 			hpbar = GameObject.FindWithTag("HPBar").GetComponent<HPBar>();
 		}
 		playerMove = GetComponent<PlayerMove>();
+		playerDeath = GetComponent<PlayerDeath>();
 
 	}
 	virtual protected void Update()
@@ -63,15 +66,11 @@ public class PlayerStatus : MonoBehaviour
 		if (hp - damage <= 0)
 		{
 			hp = 0;
-			Death();
+			playerDeath.Death();
 		}
 		else
 		{
 			hp -= damage;
 		}
-	}
-	public void Death()
-	{
-
 	}
 }

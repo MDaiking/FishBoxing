@@ -7,7 +7,6 @@ using UnityEngine.Networking;
 
 namespace Unity.Netcode.Samples.APIDiorama.RPC
 {
-
 	public class PlayerSetup : Unity.Netcode.NetworkBehaviour
 	{
 		private GameObject I;
@@ -19,12 +18,12 @@ namespace Unity.Netcode.Samples.APIDiorama.RPC
 
 		[SerializeField]
 		private GameObject cameraRoot;
-		
+
 		private Vector3 GetSpawnPosition()
 		{
 			return new Vector3(0.0f, 5.0f, 0.0f);
 		}
-	
+
 		public override void OnNetworkSpawn()
 		{
 			base.OnNetworkSpawn();
@@ -38,11 +37,7 @@ namespace Unity.Netcode.Samples.APIDiorama.RPC
 		}
 		private void Update()
 		{
-			if (Input.GetKeyDown(KeyCode.LeftArrow))
-			{
-				transform.position = new Vector3(0.0f, 1000.0f, 0.0f);
-				Debug.Log("unchi!!!!!!!!!!!");
-			}
+			
 		}
 		private void CameraSetup()
 		{

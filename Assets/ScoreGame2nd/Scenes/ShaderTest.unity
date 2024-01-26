@@ -2071,7 +2071,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &392664762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2107,10 +2107,10 @@ MonoBehaviour:
   absorptionDistance: 5
   scatteringColor: {r: 0.06870538, g: 0.4910209, b: 0.61720663, a: 1}
   ambientScattering: 0.629
-  heightScattering: 0.765
-  displacementScattering: 0.821
+  heightScattering: 0.506
+  displacementScattering: 0.741
   directLightTipScattering: 0.725
-  directLightBodyScattering: 0.609
+  directLightBodyScattering: 0.434
   maximumHeightOverride: 0
   caustics: 1
   causticsIntensity: 0.5
@@ -2130,7 +2130,7 @@ MonoBehaviour:
   underWater: 1
   volumeBounds: {fileID: 0}
   volumeDepth: 50
-  volumeHeight: 50
+  volumeHeight: 20
   volumePrority: 0
   absorptionDistanceMultiplier: 1
   colorPyramidOffset: 3
@@ -5428,8 +5428,8 @@ Transform:
   m_GameObject: {fileID: 1318966303}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 16.2, y: 5, z: 16.2}
+  m_LocalPosition: {x: 0, y: -45, z: 0}
+  m_LocalScale: {x: 16.2, y: 50, z: 16.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

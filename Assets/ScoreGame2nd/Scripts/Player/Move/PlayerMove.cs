@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(PlayerInputList), typeof(Rigidbody), typeof(Animator))]
-[RequireComponent(typeof(UseWeapon), typeof(PlayerKnockback),typeof(PlayerStatus))]
+[RequireComponent(typeof(UseWeapon), typeof(PlayerKnockback),typeof(PlayerDeath))]
 
 public class PlayerMove : Unity.Netcode.NetworkBehaviour
 {
@@ -38,7 +38,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 	//[SerializeField]
 	//private Animator armAnimator;//一人称時のみ表示される腕のアニメーター
 	private PlayerKnockback playerKnockback;
-	PlayerStatus playerStatus;
+	PlayerDeath playerDeath;
 
 	private float verticalVelocity;//垂直速度
 
@@ -54,7 +54,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 			animator = GetComponent<Animator>();
 			useWeapon = GetComponent<UseWeapon>();
 			playerKnockback = GetComponent<PlayerKnockback>();
-			playerStatus = GetComponent<PlayerStatus>();
+			playerDeath = GetComponent<PlayerDeath>();
 			enableIsCrouch = true;
 			isCrouch = false;
 		}
@@ -72,7 +72,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 			playerKnockback.IsCrouched = IsCrouch;
 			if (transform.position.y <= 0.0f)
 			{
-				playerStatus.Death();
+				playerDeath.Death();
 				rb.drag = CalcDrag(true);
 			}
 			rb.velocity = (velocity + new Vector3(0f, verticalVelocity, 0f) + playerKnockback.CalcKnockback());
