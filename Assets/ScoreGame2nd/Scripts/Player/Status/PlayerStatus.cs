@@ -70,7 +70,7 @@ public class PlayerStatus : MonoBehaviour
 			hp -= damage;
 		}
 	}
-	private void Death()
+	public void Death()
 	{
 
 	}

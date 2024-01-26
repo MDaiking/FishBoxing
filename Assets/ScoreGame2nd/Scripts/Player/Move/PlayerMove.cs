@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(PlayerInputList), typeof(Rigidbody), typeof(Animator))]
-[RequireComponent(typeof(UseWeapon),typeof(PlayerKnockback))]
+[RequireComponent(typeof(UseWeapon), typeof(PlayerKnockback),typeof(PlayerStatus))]
 
 public class PlayerMove : Unity.Netcode.NetworkBehaviour
 {
@@ -16,6 +16,16 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 	[SerializeField]//武器構え時の減衰割合
 	private float readyToAttackDeboost;
 	private bool isCrouch;
+	public bool IsCrouch
+	{
+		get { return isCrouch; }
+	}
+	[SerializeField]
+	private float crouchResistance = 2.0f;
+	public float CrouchResistance
+	{
+		get { return crouchResistance; }
+	}
 	private bool enableIsCrouch;//しゃがむことが可能か。ジャンプ時にfalse
 	[SerializeField]
 	private float jumpPower = 5.0f;
@@ -28,6 +38,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 	//[SerializeField]
 	//private Animator armAnimator;//一人称時のみ表示される腕のアニメーター
 	private PlayerKnockback playerKnockback;
+	PlayerStatus playerStatus;
 
 	private float verticalVelocity;//垂直速度
 
@@ -43,6 +54,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 			animator = GetComponent<Animator>();
 			useWeapon = GetComponent<UseWeapon>();
 			playerKnockback = GetComponent<PlayerKnockback>();
+			playerStatus = GetComponent<PlayerStatus>();
 			enableIsCrouch = true;
 			isCrouch = false;
 		}
@@ -57,11 +69,13 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 			SetMoveInputServerRpc(velocity, verticalVelocity);
 			MoveAnimation();
 			CameraRootMove();
-		}
-		if (Input.GetKeyDown(KeyCode.K))
-		{
-			Debug.Log("knockback");
-			playerKnockback.SetKnockback(new Vector3(1.0f, 1000.0f, 0.0f), 10.0f, 10.0f);
+			playerKnockback.IsCrouched = IsCrouch;
+			if (transform.position.y <= 0.0f)
+			{
+				playerStatus.Death();
+				rb.drag = CalcDrag(true);
+			}
+			rb.velocity = (velocity + new Vector3(0f, verticalVelocity, 0f) + playerKnockback.CalcKnockback());
 		}
 	}
 	[Unity.Netcode.ServerRpc]
@@ -70,13 +84,7 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 		this.velocity = _velocity;
 		this.verticalVelocity = _verticalVelocity;
 	}
-	private void FixedUpdate()
-	{
-		if (IsOwner)
-		{
-			rb.velocity = (velocity + new Vector3(0f, verticalVelocity, 0f) + playerKnockback.CalcKnockback());
-		}
-	}
+
 	private void CameraRootMove()
 	{
 		if (isCrouch) cameraRoot.IsCrouch = true;
@@ -127,6 +135,17 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 		if (enableIsCrouch)
 		{
 			isCrouch = playerInputList.IsCrouch;
+		}
+	}
+	private float CalcDrag(bool isInWater)
+	{
+		if (isInWater)
+		{
+			return 3.0f;
+		}
+		else
+		{
+			return 0.0f;
 		}
 	}
 }

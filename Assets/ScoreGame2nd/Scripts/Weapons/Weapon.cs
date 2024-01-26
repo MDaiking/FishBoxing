@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour
 	protected GameObject player;
 	protected UseWeapon useWeapon;
 	private PlayerMove playerMove;
+	[SerializeField]
 	protected bool isUsing;
 	protected bool isEating;
 	private bool isAttackAnimation;
@@ -30,8 +31,14 @@ public class Weapon : MonoBehaviour
 	protected float? defaultSize = null;
 	protected float? atAttackSize = null;
 	private Transform rootTransform;
-	protected bool isDefaultSize;
-	protected bool isBackingToDefaultSize;
+	[SerializeField]
+	protected bool canUseWeapon;
+	public bool CanUseWeapon
+	{
+		get { return canUseWeapon; }
+	}
+	[SerializeField]
+	protected bool isBackingDefaultSize;
 	protected Tween changeSizeTween;
 
 	protected AudioSource audioSource;
@@ -42,8 +49,8 @@ public class Weapon : MonoBehaviour
 	public virtual void Setup()
 	{
 		isUsing = false;
-		isDefaultSize = false;
-		isBackingToDefaultSize = false;
+		canUseWeapon = true;
+		isBackingDefaultSize = false;
 		animator = transform.root.GetComponent<Animator>();
 		player = GameObject.FindWithTag("Player");
 		playerMove = player.GetComponent<PlayerMove>();
@@ -61,18 +68,21 @@ public class Weapon : MonoBehaviour
 		{
 			canHitEnemy = false;
 		}
-		if (!isDefaultSize && useWeapon.IsIdleAnimation())
+		if (!canUseWeapon && !IsUsing && !isBackingDefaultSize && useWeapon.IsIdleAnimation())
 		{
+			isBackingDefaultSize = true;
 			SetDefaultWeaponSize(0.2f);
 		}
 	}
-	public virtual void Use()
+	public virtual bool Use()
 	{
-		if (!GetCanActivateWeapon())
+		if (!canUseWeapon || IsUsing)
 		{
-			return;
+			return false;
 		}
 		isUsing = true;
+		canUseWeapon = false;
+		return true;
 	}
 	public virtual void Eat()
 	{
@@ -86,7 +96,7 @@ public class Weapon : MonoBehaviour
 	{
 		if (isAttackAnimation && !canHitEnemy)
 		{
-			Debug.Log("damage " + damage + " to " + enemy + "(knockback: " + knockbackPower + ", " + knockbackResistance + ")");
+			Debug.Log("damage " + damage + " to " + enemy + "\n(knockback: " + knockbackPower + ", " + knockbackResistance + ")");
 			canHitEnemy = true;
 			PlayerStatus enemyStatus = enemy.GetComponent<PlayerStatus>();
 			if (enemyStatus != null)
@@ -100,7 +110,7 @@ public class Weapon : MonoBehaviour
 			PlayerKnockback enemyKB = enemy.GetComponent<PlayerKnockback>();
 			if (enemyKB != null)
 			{
-				enemyKB.SetKnockback(player.transform.rotation.eulerAngles, (float)knockbackPower, (float)knockbackResistance);
+				enemyKB.SetKnockback(player.transform.forward, (float)knockbackPower, (float)knockbackResistance);
 			}
 			else
 			{
@@ -110,13 +120,15 @@ public class Weapon : MonoBehaviour
 	}
 	protected void SetWeaponSize(float size, float setTime)
 	{
-		changeSizeTween = rootTransform.DOScale(new Vector3(size, size, size), setTime)
-			.OnStart(() => { if (size == defaultSize) { isBackingToDefaultSize = true; } })
-			.OnComplete(() =>
-			{
-				isDefaultSize = (size == defaultSize);
-				isBackingToDefaultSize = false;
-			});
+		if ((size == defaultSize))
+		{
+			SetDefaultWeaponSize(setTime);
+		}
+		else
+		{
+			changeSizeTween.Kill(false);
+			changeSizeTween = rootTransform.DOScale(new Vector3(size, size, size), setTime);
+		}
 	}
 	protected void SetWeaponSize(float? size, float setTime)
 	{
@@ -128,25 +140,19 @@ public class Weapon : MonoBehaviour
 		{
 			float _defaultSize = (float)defaultSize;
 			rootTransform.localScale = new Vector3(_defaultSize, _defaultSize, _defaultSize);
-			isDefaultSize = true;
-			isBackingToDefaultSize = false;
-
+			isBackingDefaultSize = false;
 		}
 		else
 		{
 			float _defaultSize = (float)defaultSize;
+			changeSizeTween.Kill(false);
 			changeSizeTween = rootTransform.DOScale(new Vector3(_defaultSize, _defaultSize, _defaultSize), setTime)
-				.OnStart(() => { isBackingToDefaultSize = true; })
 				.OnComplete(() =>
 				{
-					isDefaultSize = true;
-					isBackingToDefaultSize = false;
+					canUseWeapon = true;
+					isBackingDefaultSize = false;
 				});
 		}
-	}
-	public bool GetCanActivateWeapon()
-	{
-		return (useWeapon.IsIdleAnimation() && !isBackingToDefaultSize);
 	}
 	public virtual WeaponType GetWeaponType()
 	{

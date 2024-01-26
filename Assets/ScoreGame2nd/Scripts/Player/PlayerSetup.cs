@@ -30,7 +30,6 @@ namespace Unity.Netcode.Samples.APIDiorama.RPC
 			base.OnNetworkSpawn();
 			I = this.gameObject;
 			transform.position = GetSpawnPosition();
-			Debug.Log("position: " + transform.position);
 			if (IsOwner)
 			{
 				SettingSetup();

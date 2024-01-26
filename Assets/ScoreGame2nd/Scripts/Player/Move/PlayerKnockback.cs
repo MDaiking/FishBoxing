@@ -2,9 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerKnockback : Unity.Netcode.NetworkBehaviour
 {
 	private bool isKnockback;
+	private bool isCrouched;
+	public bool IsCrouched
+	{
+		set { isCrouched = value; }
+	}
+	[SerializeField]
+	private float crouchResistance = 2.0f;
 	private int knockbackTimer;
 	private Vector3 knockbackDirection;
 	private float knockbackPower;
@@ -15,6 +23,7 @@ public class PlayerKnockback : Unity.Netcode.NetworkBehaviour
 		if (IsOwner)
 		{
 			isKnockback = false;
+			isCrouched = false;
 		}
 	}
 	private void FixedUpdate()
@@ -29,6 +38,12 @@ public class PlayerKnockback : Unity.Netcode.NetworkBehaviour
 		direction.y = 0.0f;
 		knockbackDirection = direction.normalized;
 		knockbackPower = power;
+		if (isCrouched)
+		{
+			knockbackPower /= crouchResistance;
+			knockbackDirection /= crouchResistance;
+		}
+
 		knockbackResistance = resistance;
 		isKnockback = true;
 		knockbackTimer = 0;

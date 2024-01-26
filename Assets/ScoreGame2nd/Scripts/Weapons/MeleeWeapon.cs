@@ -33,7 +33,7 @@ public class MeleeWeapon : Weapon
 	protected override void Update()
 	{
 		base.Update();
-		if (IsUsing)
+		if (IsUsing && !canUseWeapon)
 		{
 			UseUpdate();
 			if (playerInputList.IsAttackEnd)
@@ -41,7 +41,7 @@ public class MeleeWeapon : Weapon
 				FinishToUse();
 			}
 		}
-		else if (IsEating)
+		else if (IsEating && !canUseWeapon)
 		{
 			if (playerInputList.IsEat)
 			{
@@ -64,31 +64,40 @@ public class MeleeWeapon : Weapon
 			DamageToEnemy(collider.gameObject);
 		}
 	}
-	public override void Use()
+	public override bool Use()
 	{
-		base.Use();
-		SetWeaponSize((float)atAttackSize, 1.0f);
-		float readySpeed = ReadyToAttackAnimationSpeed();
-		animator.SetFloat("ReadyToAttackSpeed", readySpeed);
-		animator.SetBool("IsAttack", true);
-		animator.SetBool("CanAttack", false);
-		checkAttacking.SetActive();
-		timer.StartTimer((float)readyForSwingSpeed);
+		if (base.Use())
+		{
+			SetWeaponSize((float)atAttackSize, 1.0f);
+			float readySpeed = ReadyToAttackAnimationSpeed();
+			animator.SetBool("IsAttack", true);
+			animator.SetFloat("ReadyToAttackSpeed", readySpeed);
+			animator.SetBool("CanAttack", false);
+			checkAttacking.SetActive();
+			timer.StartTimer((float)readyForSwingSpeed);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	private void UseUpdate()
 	{
 		checkAttacking.SetAmount(timer.GetTimePercent());
+		canUseWeapon = false;
 	}
 	private void FinishToUse()
 	{
+
 		bool canSwing = timer.StopTimer();
 		animator.SetBool("IsAttack", false);
 		animator.SetBool("CanAttack", canSwing);
 		checkAttacking.SetInactive();
 		isUsing = false;
-		if (canSwing)
+		if (!canSwing)
 		{
-
+			SetDefaultWeaponSize(0.2f);
 		}
 	}
 	public override void Eat()

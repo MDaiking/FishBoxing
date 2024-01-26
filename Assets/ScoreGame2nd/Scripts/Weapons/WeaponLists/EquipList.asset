@@ -27,7 +27,8 @@ MonoBehaviour:
     readyForSwingSpeedInUI: 2
     swingSpeed: 0
     swingSpeedInUI: 2
-    knockbackPower: 0
+    knockbackPower: 20
+    knockbackResistance: 10
     knockbackPowerInUI: 2
     eatSpeed: 1
     eatSpeedInUI: 2
@@ -51,6 +52,7 @@ MonoBehaviour:
     swingSpeed: 0
     swingSpeedInUI: 2
     knockbackPower: 0
+    knockbackResistance: 0
     knockbackPowerInUI: 2
     eatSpeed: 1
     eatSpeedInUI: 1
@@ -74,6 +76,7 @@ MonoBehaviour:
     swingSpeed: 0
     swingSpeedInUI: 4
     knockbackPower: 0
+    knockbackResistance: 0
     knockbackPowerInUI: 0
     eatSpeed: 0.5
     eatSpeedInUI: 3
@@ -97,6 +100,7 @@ MonoBehaviour:
     swingSpeed: 0
     swingSpeedInUI: 2
     knockbackPower: 0
+    knockbackResistance: 0
     knockbackPowerInUI: 1
     eatSpeed: 1
     eatSpeedInUI: 1
@@ -119,7 +123,8 @@ MonoBehaviour:
     readyForSwingSpeedInUI: 0
     swingSpeed: 0
     swingSpeedInUI: 0
-    knockbackPower: 0
+    knockbackPower: 40
+    knockbackResistance: 20
     knockbackPowerInUI: 4
     eatSpeed: 2
     eatSpeedInUI: 0
