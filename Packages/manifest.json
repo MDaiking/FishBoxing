@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.baba-s.kogane-event-system-status-window": "https://github.com/baba-s/Kogane.EventSystemStatusWIndow.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.burst": "1.8.11",
     "com.unity.cinemachine": "2.9.7",

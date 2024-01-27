@@ -6,6 +6,13 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "com.baba-s.kogane-event-system-status-window": {
+      "version": "https://github.com/baba-s/Kogane.EventSystemStatusWIndow.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3b34e73be7d43ccb25ffc225483751da560860e8"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

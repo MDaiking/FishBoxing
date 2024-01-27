@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
 			Debug.LogError("EquipLists“à‚ÌGameObjct[" + checkEquipListsError + "]‚ÍWeapon Script‚ª“ü‚Á‚Ä‚¢‚Ü‚¹‚ñ\n•Ší‚Ì‚İ“ü‚ê‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·");
 		}
 	}
+
 	private int CheckEquipLists()
 	{
 		int i = 0;
