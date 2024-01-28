@@ -6,52 +6,83 @@ using TMPro;
 
 public class AboutWeaponController : MonoBehaviour
 {
-    [SerializeField]
-    EquipLists equipLists;
-    [SerializeField]
-    private Image image;
-    [SerializeField]
-    private TextMeshProUGUI ruby;
-    [SerializeField]
-    new private TextMeshProUGUI name;
-    [SerializeField]
-    private TextMeshProUGUI explanation;
-    [SerializeField]
-    private ShowStatus status;
+	[SerializeField]
+	private List<FishPanel> fishPanels = new List<FishPanel>();
+	[SerializeField]
+	private EquipLists equipLists;
+	[SerializeField]
+	private Image image;
+	[SerializeField]
+	private TextMeshProUGUI ruby;
+	[SerializeField]
+	new private TextMeshProUGUI name;
+	[SerializeField]
+	private TextMeshProUGUI explanation;
+	[SerializeField]
+	private ShowStatus status;
+	private int nowSelectFish = -1;
 
-    int showWeaponNum;
+	int showWeaponNum;
 	private void Start()
 	{
-        showWeaponNum = -1;
-        SetWeaponStatus(-1);
+		showWeaponNum = -1;
+		SetWeaponStatus(-1);
+		foreach (Transform child in transform.parent)
+		{
+			FishPanel fishPanel = child.GetComponent<FishPanel>();
+			if (fishPanel != null)
+			{
+				fishPanels.Add(fishPanel);
+			}
+		}
 	}
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-            showWeaponNum++;
-            if (showWeaponNum >= 5) showWeaponNum = -1;
-            SetWeaponStatus(showWeaponNum);
+			showWeaponNum++;
+			if (showWeaponNum >= 5) showWeaponNum = -1;
+			SetWeaponStatus(showWeaponNum);
 		}
 	}
-	private void SetWeaponStatus(int num)
+	public void SetNowSelectFish(int num)
 	{
-        if(num == -1)
+		nowSelectFish = num;
+		SetSelectFish(nowSelectFish);
+	}
+	public void SetWeaponStatus(int num)
+	{
+		if (num == -1)
 		{
-            image.sprite = null;
-            ruby.text = "";
-            name.text = "";
-            explanation.text = "";
-            status.HideAllStatusUI();
+			if (nowSelectFish == -1)
+			{
+				image.sprite = null;
+				ruby.text = "";
+				name.text = "";
+				explanation.text = "";
+				status.HideAllStatusUI();
+			}
+			else
+			{
+				SetWeaponStatus(nowSelectFish);
+			}
 		}
 		else
 		{
-            EquipParam equipParam = equipLists.equipParamList[num];
-            image.sprite = equipParam.equipImage;
-            ruby.text = equipParam.ruby;
-            name.text = equipParam.name;
-            explanation.text = equipParam.explanation;
-            status.SetTexts(equipParam);
+			EquipParam equipParam = equipLists.equipParamList[num];
+			image.sprite = equipParam.equipImage;
+			ruby.text = equipParam.ruby;
+			name.text = equipParam.name;
+			explanation.text = equipParam.explanation;
+			status.SetTexts(equipParam);
+
+		}
+	}
+	private void SetSelectFish(int num)
+	{
+		for (int i = 0; i < fishPanels.Count; ++i)
+		{
+			fishPanels[i].SetEnable(i == num);
 		}
 	}
 }

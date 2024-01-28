@@ -21,6 +21,7 @@ public class Weapon : MonoBehaviour
 	private bool canHitEnemy;
 	protected Animator animator;
 	protected Sprite image;
+
 	protected int? damage = null;
 	protected float? readyForSwingSpeed = null;
 	protected float? swingSpeed = null;
@@ -30,6 +31,7 @@ public class Weapon : MonoBehaviour
 	protected int? healAmount = null;
 	protected float? defaultSize = null;
 	protected float? atAttackSize = null;
+
 	private Transform rootTransform;
 	[SerializeField]
 	protected bool canUseWeapon;

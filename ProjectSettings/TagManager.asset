@@ -13,6 +13,7 @@ TagManager:
   - CheckEating
   - CheckAttacking
   - SelectWeapons
+  - AboutWeapon
   layers:
   - Default
   - TransparentFX

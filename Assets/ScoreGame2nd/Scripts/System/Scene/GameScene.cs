@@ -11,6 +11,8 @@ public enum GameSceneEnum
 [RequireComponent(typeof(Timer))]
 public class GameScene : MonoBehaviour
 {
+	[SerializeField]
+	private NetcodeUI netcodeUI;
 	private Timer timer;
 	private GameSceneEnum nowGameScene;
 	private GameSceneEnum reservingGameScene;
@@ -30,6 +32,12 @@ public class GameScene : MonoBehaviour
 	private void Start()
 	{
 		timer = GetComponent<Timer>();
+		SetupScene();
+	}
+	private void SetupScene()
+	{
+		nowGameScene = GameSceneEnum.buy;
+		netcodeUI.StartHost();
 	}
 	private void Update()
 	{

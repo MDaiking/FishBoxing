@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class FishPanel : ButtonInUI
 {
 	private RectTransform rtransform;
+	private AboutWeaponController aboutWeaponController;
 	private float width;
 	private float height;
 	[SerializeField]
@@ -26,12 +27,13 @@ public class FishPanel : ButtonInUI
 	{
 		rtransform = GetComponent<RectTransform>();
 		panel = GetComponent<Image>();
-		//image = transform.GetChild(0).GetComponent<Image>();
+		aboutWeaponController = GameObject.FindWithTag("AboutWeapon").GetComponent<AboutWeaponController>();
+		image = transform.GetChild(0).GetComponent<Image>();
 		SetEnable(false);
-		AddEventTrigger(new Action(() => { Debug.Log("test"); if (!isSelected) { EnterToMe(); } }),
+		AddEventTrigger(new Action(() => { if (!isSelected) { EnterToMe(); } }),
 			new Action(() => { if (!isSelected) { ExitFromMe(); } }),
 			new Action(() => { ClickMe(); }));
-		//image.sprite = equipLists.equipParamList[fishNum].equipImage;
+		image.sprite = equipLists.equipParamList[fishNum].equipImage;
 
 		width = 1280.0f / 5.0f;
 		height = rtransform.sizeDelta.y;
@@ -52,16 +54,17 @@ public class FishPanel : ButtonInUI
 	public void EnterToMe()
 	{
 		panel.color = selectedPanelColor;
-		Debug.Log("Enter " + fishNum);
+		aboutWeaponController.SetWeaponStatus(fishNum);
 	}
 	private void ExitFromMe()
 	{
 		panel.color = unselectedPanelColor;
-		Debug.Log("Exit " + fishNum);
+		aboutWeaponController.SetWeaponStatus(-1);
 	}
 	private void ClickMe()
 	{
 		SetEnable(true);
+		aboutWeaponController.SetNowSelectFish(fishNum);
 		panel.color = selectedPanelColor;
 	}
 }

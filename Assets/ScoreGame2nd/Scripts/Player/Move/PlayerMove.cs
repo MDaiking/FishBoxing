@@ -27,8 +27,6 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 		get { return crouchResistance; }
 	}
 	private bool enableIsCrouch;//しゃがむことが可能か。ジャンプ時にfalse
-	[SerializeField]
-	private float jumpPower = 5.0f;
 
 	private Rigidbody rb;
 	private Vector3 velocity;

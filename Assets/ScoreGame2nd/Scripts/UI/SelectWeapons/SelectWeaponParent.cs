@@ -26,6 +26,7 @@ public class SelectWeaponParent : MonoBehaviour
 		canMove = true;
 		rectTransform = GetComponent<RectTransform>();
 		InstantToggleUI(false);
+		ToggleUI(true);
 	}
 	private void Update()
 	{
@@ -47,9 +48,9 @@ public class SelectWeaponParent : MonoBehaviour
 		}
 		else
 		{
-			int screenWidth = Screen.height;
+			int screenHeight = Screen.height * 2;
 			cursorController.IsCursorShow = false;
-			rectTransform.DOLocalMove(new Vector3(0.0f, screenWidth, 0.0f), moveTimeToHide).SetEase(Ease.OutQuad)
+			rectTransform.DOLocalMove(new Vector3(0.0f, screenHeight, 0.0f), moveTimeToHide).SetEase(Ease.OutQuad)
 				.OnStart(() => { canMove = false; })
 				.OnComplete(() => { SetActiveAllChildren(false); canMove = true; });
 		}
