@@ -8,6 +8,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image), typeof(RectTransform))]
 public class FishPanel : ButtonInUI
 {
+	private SelectWeaponParent selectWeaponParent;
 	private RectTransform rtransform;
 	private AboutWeaponController aboutWeaponController;
 	private float width;
@@ -27,6 +28,7 @@ public class FishPanel : ButtonInUI
 	{
 		rtransform = GetComponent<RectTransform>();
 		panel = GetComponent<Image>();
+		selectWeaponParent = GameObject.FindWithTag("SelectWeapons").GetComponent<SelectWeaponParent>();
 		aboutWeaponController = GameObject.FindWithTag("AboutWeapon").GetComponent<AboutWeaponController>();
 		image = transform.GetChild(0).GetComponent<Image>();
 		SetEnable(false);
@@ -63,8 +65,14 @@ public class FishPanel : ButtonInUI
 	}
 	private void ClickMe()
 	{
-		SetEnable(true);
-		aboutWeaponController.SetNowSelectFish(fishNum);
-		panel.color = selectedPanelColor;
+		PlayerEquips playerEquips = selectWeaponParent.PlayerEquip;
+		if (playerEquips != null)
+		{
+			playerEquips.ResetPlayerEquip(fishNum);
+			selectWeaponParent.ToggleUI(false);
+			SetEnable(true);
+			aboutWeaponController.SetNowSelectFish(fishNum);
+			panel.color = selectedPanelColor;
+		}
 	}
 }

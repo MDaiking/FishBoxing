@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleButtons : MonoBehaviour
+public class TitleMenuController : MonoBehaviour
 {
     List<GameObject> children = new List<GameObject>();
 
@@ -13,7 +13,7 @@ public class TitleButtons : MonoBehaviour
 			children.Add(child.gameObject);
 		}
 	}
-	public void ToggleAllButtonsActive(bool active)
+	public void ToggleTitleMenuActive(bool active)
 	{
 		foreach(GameObject child in children)
 		{

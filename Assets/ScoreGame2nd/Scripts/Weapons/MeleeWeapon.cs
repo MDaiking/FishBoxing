@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 [RequireComponent(typeof(MeshCollider), typeof(Timer))]
 
 public class MeleeWeapon : Weapon
@@ -160,20 +161,11 @@ public class MeleeWeapon : Weapon
 	}
 	private float GetAnimationLength(Animator animator, int layer, string clipName)
 	{
-		var runtimeController = animator.runtimeAnimatorController;
-		var controller = runtimeController as UnityEditor.Animations.AnimatorController;
-
-		var stateMachine = controller.layers[layer].stateMachine;
-		foreach (var state in stateMachine.states)
-		{
-			if (state.state.name == clipName)
-			{
-				AnimationClip clip = state.state.motion as AnimationClip;
-				return clip.length;
-			}
-		}
-		Debug.LogError("The " + clipName + "is not found in layer " + layer + ".");
-		return -1.0f;
+		return GetAnimationClipLength(animator.runtimeAnimatorController.animationClips, clipName);
+	}
+	private static float GetAnimationClipLength(IEnumerable<AnimationClip> animationClips, string clipName)
+	{
+		return (from animationClip in animationClips where animationClip.name == clipName select animationClip.length).FirstOrDefault();
 	}
 	public override WeaponType GetWeaponType()
 	{

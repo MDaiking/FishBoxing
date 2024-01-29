@@ -6,7 +6,7 @@ public class TitleController : MonoBehaviour
 {
     List<GameObject> children = new List<GameObject>();
     [SerializeField]
-    private TitleButtons titleButtons;
+    private TitleMenuController titleButtons;
     void Start()
     {
         foreach(Transform child in transform)

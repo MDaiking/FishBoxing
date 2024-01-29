@@ -6,6 +6,22 @@ using DG.Tweening;
 
 public class SelectWeaponParent : MonoBehaviour
 {
+	private PlayerEquips playerEquips;
+	public PlayerEquips PlayerEquip
+	{
+		get
+		{
+			return playerEquips;
+		}
+		set
+		{
+			if (PlayerEquip == null)
+			{
+				playerEquips = value;
+			}
+		}
+	}
+
 	[SerializeField]
 	private CursorController cursorController;
 	[SerializeField]
@@ -36,8 +52,9 @@ public class SelectWeaponParent : MonoBehaviour
 			ToggleUI(isShow);
 		}
 	}
-	private void ToggleUI(bool value)
+	public void ToggleUI(bool value)
 	{
+		isShow = value;
 		if (value)
 		{
 			SetActiveAllChildren(true);
@@ -57,6 +74,7 @@ public class SelectWeaponParent : MonoBehaviour
 	}
 	private void InstantToggleUI(bool value)
 	{
+		isShow = value;
 		if (value)
 		{
 			SetActiveAllChildren(true);

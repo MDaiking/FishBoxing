@@ -1280,6 +1280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066d3522ee70f3f4fbf6ad7b791ae945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serverType: 0
+  ipv4: 
   equipLists: {fileID: 11400000, guid: 71e6ebf522e54f44581b451424cff8a7, type: 2}
 --- !u!4 &259342550
 Transform:
@@ -1486,8 +1488,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "B \u3067\u8CFC\u5165\u753B\u9762\u3092\u958B\u304F"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3ad6e19ec47a5934b97a90eb9b5bab0c, type: 2}
-  m_sharedMaterial: {fileID: 8140706337417111528, guid: 3ad6e19ec47a5934b97a90eb9b5bab0c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
+  m_sharedMaterial: {fileID: 8140706337417111528, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2890,7 +2892,7 @@ GameObject:
   - component: {fileID: 632063345}
   m_Layer: 0
   m_Name: NetcodeUI
-  m_TagString: Untagged
+  m_TagString: NetcodeUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

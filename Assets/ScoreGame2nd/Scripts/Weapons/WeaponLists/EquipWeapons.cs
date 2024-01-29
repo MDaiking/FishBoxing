@@ -11,6 +11,7 @@ public class EquipWeapons : MonoBehaviour
 	public List<Weapon> InitAviableEquips(List<int> nowEquipList, int startEquip)
 	{
 		List<Weapon> weapons = new List<Weapon>();
+		int i = 0;
 		foreach (int nowEquipNum in nowEquipList)
 		{
 			EquipParam equipParam = equipLists.equipParamList[nowEquipNum];
@@ -32,8 +33,8 @@ public class EquipWeapons : MonoBehaviour
 			weapon.Setup();
 			weapons.Add(weapon);
 
+			equip.SetActive(i++ == startEquip);
 		}
-		ChangeWeapon(startEquip);
 		return weapons;
 	}
 	public void ChangeWeapon(int equipNum)

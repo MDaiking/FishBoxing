@@ -8,6 +8,7 @@ using Cinemachine;
 //プレイヤーの設定に関するクラス
 public class PlayerSettingData
 {
+
 	private int sensitivity;//動作感度
 	public static readonly int initSensitivity = 100;
 	public int Sensitibity

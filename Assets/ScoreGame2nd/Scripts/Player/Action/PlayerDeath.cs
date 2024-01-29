@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerDeath : MonoBehaviour
 {
+	private GameSettings gameSettings;
 	private Animator animator;
 	private RagdollController ragdoll;
 	private void Start()
@@ -14,6 +15,7 @@ public class PlayerDeath : MonoBehaviour
 	}
 	public void Death()
 	{
+		
 		ragdoll.SetRagdoll(true);
 	}
 }

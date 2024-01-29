@@ -6,10 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/ScoreGame2nd/Scenes/Title.unity
+    guid: 4714b43888ead144e9614a6132f8c9fa
+  - enabled: 1
     path: Assets/ScoreGame2nd/Scenes/ShaderTest.unity
     guid: c50c48ce72979f4418f4ae0e57a053a9
   - enabled: 1
     path: Assets/ScoreGame2nd/Scenes/Practice.unity
-    guid: 5875316a6092637488f8d64ea3211b25
+    guid: bfec5ee9a7cf0de41a2b685bc149236d
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

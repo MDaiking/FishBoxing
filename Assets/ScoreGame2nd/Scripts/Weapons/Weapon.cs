@@ -122,15 +122,8 @@ public class Weapon : MonoBehaviour
 	}
 	protected void SetWeaponSize(float size, float setTime)
 	{
-		if ((size == defaultSize))
-		{
-			SetDefaultWeaponSize(setTime);
-		}
-		else
-		{
-			changeSizeTween.Kill(false);
-			changeSizeTween = rootTransform.DOScale(new Vector3(size, size, size), setTime);
-		}
+		changeSizeTween.Kill(false);
+		changeSizeTween = rootTransform.DOScale(new Vector3(size, size, size), setTime);
 	}
 	protected void SetWeaponSize(float? size, float setTime)
 	{

@@ -17,6 +17,7 @@ public class RotatingUI : MonoBehaviour
 	}
 	private void Start()
 	{
+		isRotating = true;
 		rTransform = GetComponent<RectTransform>();
 	}
 	private void Update()

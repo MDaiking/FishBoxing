@@ -6,11 +6,12 @@ using UnityEngine;
 public class PlayerEquips : MonoBehaviour
 {
 	[SerializeField]
-	protected int maxEquip = 3;
+	protected int maxEquip = 1;
 	public int MaxEquip
 	{
 		get { return maxEquip; }
 	}
+	[SerializeField]
 	protected int nowEquip = 0;
 	public int NowEquip
 	{
@@ -18,6 +19,7 @@ public class PlayerEquips : MonoBehaviour
 	}
 	[SerializeField]
 	protected List<int> playerEquips = new List<int>();
+	[SerializeField]
 	protected List<Weapon> playerWeapons = new List<Weapon>();
 	public List<Weapon> PlayerWeapons
 	{
@@ -37,10 +39,7 @@ public class PlayerEquips : MonoBehaviour
 	{
 		playerInputList = GetComponent<PlayerInputList>();
 		useWeapon = GetComponent<UseWeapon>();
-		if (playerInputList == null)
-		{
-			Debug.LogError("PlayerInputListがコンポーネントされていません");
-		}
+		GameObject.FindWithTag("SelectWeapons").GetComponent<SelectWeaponParent>().PlayerEquip = this;
 		checkEating = GameObject.FindWithTag("CheckEating").GetComponent<CheckEatingController>();
 		playerWeapons = equipWeapons.InitAviableEquips(playerEquips, nowEquip);
 	}
@@ -58,22 +57,46 @@ public class PlayerEquips : MonoBehaviour
 		if (scrollCount != 0)
 		{
 			AddNowEquipNum(scrollCount);
-			equipWeapons.ChangeWeapon(playerEquips[nowEquip]);
+			equipWeapons.ChangeWeapon(nowEquip);
 			checkEating.SetEatingFishSprite(GetNowEquipParam());
 			GetNowWeapon().SetDefaultWeaponSize(0.0f);
 		}
 	}
 	private void AddNowEquipNum(int addnum)//addnum分武器をずらす。マイナスにも対応
 	{
+		int havingEquips = playerWeapons.Count;
+		if (havingEquips == 1)
+		{
+			return;
+		}
 		int n = nowEquip + addnum;
-		if (0 > n) nowEquip = (maxEquip + n % maxEquip);
-		else if (n >= nowEquip) nowEquip = (n % maxEquip);
+		if (0 > n) nowEquip = (havingEquips + n % havingEquips);
+		else if (n >= nowEquip) nowEquip = (n % havingEquips);
 		else nowEquip = n;
 	}
 
 	public EquipParam GetNowEquipParam()
 	{
 		return GetEquipParam(NowEquip);
+	}
+	public void ResetPlayerEquip(int equipNum)
+	{
+		List<int> equipNums = new List<int>();
+		equipNums.Add(equipNum);
+		ResetPlayerEquip(equipNums);
+
+	}
+	public void ResetPlayerEquip(List<int> equipNums)
+	{
+		foreach (Weapon weapon in playerWeapons)
+		{
+			Destroy(weapon.gameObject);
+		}
+		nowEquip = 0;
+		playerEquips.Clear();
+		playerEquips = equipNums;
+		playerWeapons.Clear();
+		playerWeapons = equipWeapons.InitAviableEquips(playerEquips, nowEquip);
 	}
 	public EquipParam GetEquipParam(int equipNum)
 	{

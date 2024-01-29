@@ -14,6 +14,7 @@ TagManager:
   - CheckAttacking
   - SelectWeapons
   - AboutWeapon
+  - NetcodeUI
   layers:
   - Default
   - TransparentFX
