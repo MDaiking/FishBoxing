@@ -38,12 +38,7 @@ public class AboutWeaponController : MonoBehaviour
 	}
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			showWeaponNum++;
-			if (showWeaponNum >= 5) showWeaponNum = -1;
-			SetWeaponStatus(showWeaponNum);
-		}
+
 	}
 	public void SetNowSelectFish(int num)
 	{

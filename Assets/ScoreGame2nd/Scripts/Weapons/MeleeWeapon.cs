@@ -53,6 +53,10 @@ public class MeleeWeapon : Weapon
 				FinishToEat(false);
 			}
 		}
+		else if(isAfterEatingCooldown && !canUseWeapon)
+		{
+			CoolTimeUpdate();
+		}
 	}
 	public void SetWeaponCollider(bool isAviable)
 	{
@@ -101,13 +105,20 @@ public class MeleeWeapon : Weapon
 			SetDefaultWeaponSize(0.2f);
 		}
 	}
-	public override void Eat()
+	public override bool Eat()
 	{
-		base.Eat();
-		timer.StartTimer((float)eatSpeed);
-		float _eatingSpeed = EatAnimationSpeed();
-		animator.SetFloat("EatingSpeed", _eatingSpeed);
-		animator.SetBool("IsEating", true);
+		if (base.Eat())
+		{
+			timer.StartTimer((float)eatSpeed);
+			float _eatingSpeed = EatAnimationSpeed();
+			animator.SetFloat("EatingSpeed", _eatingSpeed);
+			animator.SetBool("IsEating", true);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	private void EatUpdate()
 	{
@@ -135,8 +146,24 @@ public class MeleeWeapon : Weapon
 
 		}
 		isEating = false;
+		canUseWeapon = false;
+		isAfterEatingCooldown = true;
+		timer.StartTimer((float)coolTime);
 	}
-
+	private void CoolTimeUpdate()
+	{
+		float cooltimeper = timer.GetTimePercent();
+		if (cooltimeper >= 1.0f)
+		{
+			timer.StopTimer();
+			isAfterEatingCooldown = false;
+			canUseWeapon = true;
+		}
+		else
+		{
+			checkEating.SetFishMaskPercent(1.0f - cooltimeper);
+		}
+	}
 	private float ReadyToAttackAnimationSpeed()
 	{
 		if (readyToAttackSpeedInAnimation != -1.0f && readyForSwingSpeed != 0.0f)

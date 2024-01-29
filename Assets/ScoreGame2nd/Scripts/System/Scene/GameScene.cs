@@ -7,12 +7,20 @@ public enum GameSceneEnum
 {
 	buy, ready, goOn, finish
 }
+[System.Serializable]
+public enum GameTypeEnum
+{
+	battle,practice,
+}
 
 [RequireComponent(typeof(Timer))]
 public class GameScene : MonoBehaviour
 {
 	private GameManager gameManager;
+	private NetcodeUI netcodeUI;
 	private Timer timer;
+	[SerializeField]
+	private GameTypeEnum gameType;
 	private GameSceneEnum nowGameScene;
 	private GameSceneEnum reservingGameScene;
 	public GameSceneEnum NowGameScene
@@ -32,11 +40,16 @@ public class GameScene : MonoBehaviour
 	{
 		timer = GetComponent<Timer>();
 		gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+		netcodeUI = GameObject.FindWithTag("NetcodeUI").GetComponent<NetcodeUI>();
 		SetupScene();
 	}
 	private void SetupScene()
 	{
 		nowGameScene = GameSceneEnum.buy;
+		if(gameType == GameTypeEnum.practice)
+		{
+			netcodeUI.StartHost();
+		}
 	}
 	private void Update()
 	{

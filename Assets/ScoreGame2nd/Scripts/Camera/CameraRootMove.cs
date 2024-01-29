@@ -11,6 +11,9 @@ public class CameraRootMove : MonoBehaviour
 	private float defaultY;
 	private bool isCrouch;//‚µ‚á‚ª‚Ý
 	private bool isChangeToCrouch;
+	private PlayerDeath playerDeath;
+	[SerializeField]
+	private Transform deadWatchingPos;
 
 	public bool IsCrouch
 	{
@@ -31,11 +34,19 @@ public class CameraRootMove : MonoBehaviour
 
 		isCrouch = false;
 		isChangeToCrouch = false;
+		playerDeath = transform.parent.GetComponent<PlayerDeath>();
 
 	}
 	private void Update()
 	{
-		CrouchMove();
+		if (!playerDeath.IsPlayerDead)
+		{
+			CrouchMove();
+		}
+		else
+		{
+			transform.position = deadWatchingPos.position;
+		}
 	}
 	private void CrouchMove()
 	{

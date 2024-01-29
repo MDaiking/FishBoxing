@@ -17,7 +17,7 @@ public class UseWeapon : MonoBehaviour
 		playerEquips = GetComponent<PlayerEquips>();
 		playerInputList = GetComponent<PlayerInputList>();
 		animator = GetComponent<Animator>();
-		cursorController = GameObject.FindWithTag("GameManager").GetComponent<CursorController>();
+		cursorController = GameObject.FindWithTag("GameController").GetComponent<CursorController>();
 	}
 	private void Update()
 	{

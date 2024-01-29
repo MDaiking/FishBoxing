@@ -8,7 +8,7 @@ public enum WeaponType
 	none,
 	melee,
 }
-[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(AudioSource),typeof(AudioSource))]
 public class Weapon : MonoBehaviour
 {
 	protected GameObject player;
@@ -16,7 +16,10 @@ public class Weapon : MonoBehaviour
 	private PlayerMove playerMove;
 	[SerializeField]
 	protected bool isUsing;
+	[SerializeField]
 	protected bool isEating;
+	[SerializeField]
+	protected bool isAfterEatingCooldown;
 	private bool isAttackAnimation;
 	private bool canHitEnemy;
 	protected Animator animator;
@@ -29,6 +32,7 @@ public class Weapon : MonoBehaviour
 	protected float? knockbackResistance = null;
 	protected float? eatSpeed = null;
 	protected int? healAmount = null;
+	protected float? coolTime = null;
 	protected float? defaultSize = null;
 	protected float? atAttackSize = null;
 
@@ -39,8 +43,6 @@ public class Weapon : MonoBehaviour
 	{
 		get { return canUseWeapon; }
 	}
-	[SerializeField]
-	protected bool isBackingDefaultSize;
 	protected Tween changeSizeTween;
 
 	protected AudioSource audioSource;
@@ -52,7 +54,7 @@ public class Weapon : MonoBehaviour
 	{
 		isUsing = false;
 		canUseWeapon = true;
-		isBackingDefaultSize = false;
+		isAfterEatingCooldown = false;
 		animator = transform.root.GetComponent<Animator>();
 		player = GameObject.FindWithTag("Player");
 		playerMove = player.GetComponent<PlayerMove>();
@@ -70,39 +72,43 @@ public class Weapon : MonoBehaviour
 		{
 			canHitEnemy = false;
 		}
-		if (!canUseWeapon && !IsUsing && !isBackingDefaultSize && useWeapon.IsIdleAnimation())
+		if (!canUseWeapon && !IsUsing && !IsEating && useWeapon.IsIdleAnimation() && !isAfterEatingCooldown)
 		{
-			isBackingDefaultSize = true;
+			canUseWeapon = true;
 			SetDefaultWeaponSize(0.2f);
 		}
 	}
 	public virtual bool Use()
 	{
-		if (!canUseWeapon || IsUsing)
+		if (!canUseWeapon || IsUsing || isAfterEatingCooldown)
 		{
 			return false;
 		}
 		isUsing = true;
 		canUseWeapon = false;
+		audioSource.PlayOneShot(swingSound);
 		return true;
 	}
-	public virtual void Eat()
+	public virtual bool Eat()
 	{
-		if (GetWeaponType() != WeaponType.melee)
+		if (GetWeaponType() != WeaponType.melee || !canUseWeapon || IsEating || isAfterEatingCooldown)
 		{
-			return;
+			return false;
 		}
 		isEating = true;
+		canUseWeapon = false;
+		return true;
 	}
 	protected virtual void DamageToEnemy(GameObject enemy)
 	{
 		if (isAttackAnimation && !canHitEnemy)
 		{
-			Debug.Log("damage " + damage + " to " + enemy + "\n(knockback: " + knockbackPower + ", " + knockbackResistance + ")");
+			//Debug.Log("damage " + damage + " to " + enemy + "\n(knockback: " + knockbackPower + ", " + knockbackResistance + ")");
 			canHitEnemy = true;
 			PlayerStatus enemyStatus = enemy.GetComponent<PlayerStatus>();
 			if (enemyStatus != null)
 			{
+				audioSource.PlayOneShot(hitSound);
 				enemyStatus.Damaged((int)damage);
 			}
 			else
@@ -135,7 +141,6 @@ public class Weapon : MonoBehaviour
 		{
 			float _defaultSize = (float)defaultSize;
 			rootTransform.localScale = new Vector3(_defaultSize, _defaultSize, _defaultSize);
-			isBackingDefaultSize = false;
 		}
 		else
 		{
@@ -145,7 +150,6 @@ public class Weapon : MonoBehaviour
 				.OnComplete(() =>
 				{
 					canUseWeapon = true;
-					isBackingDefaultSize = false;
 				});
 		}
 	}
@@ -259,6 +263,20 @@ public class Weapon : MonoBehaviour
 			}
 		}
 	}
+	public float CoolTime
+	{
+		set
+		{
+			if (coolTime == null)
+			{
+				coolTime = value;
+			}
+			else
+			{
+				Debug.LogError("ÉNÅ[ÉãÉ^ÉCÉÄÇçƒíËã`Ç∑ÇÈÇ±Ç∆ÇÕÇ≈Ç´Ç‹ÇπÇÒ");
+			}
+		}
+	}
 	public float DefaultSize
 	{
 		set
@@ -303,6 +321,60 @@ public class Weapon : MonoBehaviour
 		get
 		{
 			return image;
+		}
+	}
+	public AudioClip SwingSound
+	{
+		set
+		{
+			if (swingSound == null)
+			{
+				swingSound = value;
+			}
+			else
+			{
+				Debug.LogError("\"swingSound\"âπê∫ÇÕä˘Ç…ìoò^Ç≥ÇÍÇƒÇ¢Ç‹Ç∑ÅB");
+			}
+		}
+		get
+		{
+			return swingSound;
+		}
+	}
+	public AudioClip HitSound
+	{
+		set
+		{
+			if (hitSound == null)
+			{
+				hitSound = value;
+			}
+			else
+			{
+				Debug.LogError("\"hitSound\"âπê∫ÇÕä˘Ç…ìoò^Ç≥ÇÍÇƒÇ¢Ç‹Ç∑ÅB");
+			}
+		}
+		get
+		{
+			return hitSound;
+		}
+	}
+	public AudioClip EatSound
+	{
+		set
+		{
+			if (eatSound == null)
+			{
+				eatSound = value;
+			}
+			else
+			{
+				Debug.LogError("\"eatSound\"âπê∫ÇÕä˘Ç…ìoò^Ç≥ÇÍÇƒÇ¢Ç‹Ç∑ÅB");
+			}
+		}
+		get
+		{
+			return eatSound;
 		}
 	}
 }

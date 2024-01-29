@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(PlayerDeath))]
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -43,7 +42,10 @@ public class PlayerStatus : MonoBehaviour
 	}
 	virtual protected void Update()
 	{
-
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			Damaged(20);
+		}
 	}
 	virtual protected void FixedUpdate()
 	{
@@ -66,7 +68,10 @@ public class PlayerStatus : MonoBehaviour
 		if (hp - damage <= 0)
 		{
 			hp = 0;
-			playerDeath.Death();
+			if (playerDeath != null)
+			{
+				playerDeath.Death();
+			}
 		}
 		else
 		{

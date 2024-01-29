@@ -1257,7 +1257,6 @@ GameObject:
   m_Component:
   - component: {fileID: 259342550}
   - component: {fileID: 259342549}
-  - component: {fileID: 259342551}
   - component: {fileID: 259342554}
   - component: {fileID: 259342553}
   - component: {fileID: 259342555}
@@ -1280,8 +1279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066d3522ee70f3f4fbf6ad7b791ae945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverType: 0
-  ipv4: 
   equipLists: {fileID: 11400000, guid: 71e6ebf522e54f44581b451424cff8a7, type: 2}
 --- !u!4 &259342550
 Transform:
@@ -1298,18 +1295,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &259342551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259342548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09c00ab2b395ebd4d8d8b5221cea37fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &259342553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1488,8 +1473,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "B \u3067\u8CFC\u5165\u753B\u9762\u3092\u958B\u304F"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
-  m_sharedMaterial: {fileID: 8140706337417111528, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4184,6 +4169,7 @@ GameObject:
   - component: {fileID: 977574742}
   - component: {fileID: 977574741}
   - component: {fileID: 977574740}
+  - component: {fileID: 977574743}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -4203,7 +4189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d54cd5bf8dad174d9a3e98030e8ffc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  netcodeUI: {fileID: 632063345}
 --- !u!114 &977574741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4231,6 +4216,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &977574743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977574739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c00ab2b395ebd4d8d8b5221cea37fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &985196036
 GameObject:
   m_ObjectHideFlags: 0
@@ -7923,7 +7920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 642f43edf51b7c641be657b028554b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorController: {fileID: 259342551}
+  cursorController: {fileID: 977574743}
   moveTimeToShow: 1
   moveTimeToHide: 0.5
 --- !u!1 &1916303196

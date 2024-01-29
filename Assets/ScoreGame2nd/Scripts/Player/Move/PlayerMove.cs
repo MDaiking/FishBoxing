@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(PlayerInputList), typeof(Rigidbody), typeof(Animator))]
-[RequireComponent(typeof(UseWeapon), typeof(PlayerKnockback),typeof(PlayerDeath))]
+[RequireComponent(typeof(UseWeapon), typeof(PlayerKnockback), typeof(PlayerDeath))]
 
 public class PlayerMove : Unity.Netcode.NetworkBehaviour
 {

@@ -40,7 +40,7 @@ public class CameraRotate : Unity.Netcode.NetworkBehaviour
 			rotateCharacter = transform.localRotation;
 			playerInput = GetComponent<PlayerInput>();
 			rotate = playerInput.actions["Rotate"];
-			cursorController = GameObject.FindWithTag("GameManager").GetComponent<CursorController>();
+			cursorController = GameObject.FindWithTag("GameController").GetComponent<CursorController>();
 			//rotateText = GameObject.Find("rotate").GetComponent<RotateText>();
 		}
 	}

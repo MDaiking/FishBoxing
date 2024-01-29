@@ -48,6 +48,7 @@ public class EquipParam
 	public SizeEnum knockbackPowerInUI;
 	[Tooltip("食事時の速度")]
 	public float eatSpeed;
+	public float cooltime;
 	public SpeedEnum eatSpeedInUI;
 	[Tooltip("食事終了時の回復量")]
 	public int healAmount;

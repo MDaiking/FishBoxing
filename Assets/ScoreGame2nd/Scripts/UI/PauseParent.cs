@@ -13,7 +13,6 @@ public class PauseParent : MonoBehaviour
 	[SerializeField]
 	private List<PauseButton> settingsPB;
 
-	private GameObject gameManager;
 	private CursorController cursorController;
 	private SystemInputList sil;
 
@@ -34,9 +33,8 @@ public class PauseParent : MonoBehaviour
 		}
 		isPause = false;
 
-		gameManager = GameObject.FindWithTag("GameManager");
-		cursorController = gameManager.GetComponent<CursorController>();
-		sil = gameManager.GetComponent<SystemInputList>();
+		cursorController = GameObject.FindWithTag("GameController").GetComponent<CursorController>();
+		sil = GameObject.FindWithTag("GameManager").GetComponent<SystemInputList>();
 		SetNumInSettings();
 		InactiveSetting();
 	}

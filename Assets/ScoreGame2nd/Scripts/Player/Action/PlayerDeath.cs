@@ -5,17 +5,24 @@ using UnityEngine;
 
 public class PlayerDeath : MonoBehaviour
 {
-	private GameSettings gameSettings;
-	private Animator animator;
 	private RagdollController ragdoll;
+	private bool isPlayerDead;
+	public bool IsPlayerDead
+	{
+		get { return isPlayerDead; }
+	}
 	private void Start()
 	{
-		animator = GetComponent<Animator>();
 		ragdoll = GetComponent<RagdollController>();
+		isPlayerDead = false;
 	}
 	public void Death()
 	{
-		
-		ragdoll.SetRagdoll(true);
+		if (!isPlayerDead)
+		{
+			isPlayerDead = true;
+			Debug.Log("Player dead!!!");
+			ragdoll.SetRagdoll(true, true);
+		}
 	}
 }

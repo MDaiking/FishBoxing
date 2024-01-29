@@ -28,8 +28,12 @@ public class EquipWeapons : MonoBehaviour
 			weapon.EatSpeed = equipParam.eatSpeed;
 			weapon.HealAmount = equipParam.healAmount;
 			weapon.WeaponImage = equipParam.equipImage;
+			weapon.CoolTime = equipParam.cooltime;
 			weapon.DefaultSize = equipParam.defaultSize;
 			weapon.AtAttackSize = equipParam.atAttackSize;
+			weapon.SwingSound = equipParam.swingSound;
+			weapon.HitSound = equipParam.hitSound;
+			weapon.EatSound = equipParam.eatSound;
 			weapon.Setup();
 			weapons.Add(weapon);
 
