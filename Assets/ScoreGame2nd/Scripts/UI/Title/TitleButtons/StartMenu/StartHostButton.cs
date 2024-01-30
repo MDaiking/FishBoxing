@@ -41,5 +41,6 @@ public class StartHostButton : ButtonInUI
 	private void StartHost()
 	{
 		netcodeUI.StartHost();
+		SceneManager.LoadScene("ShaderTest");
 	}
 }

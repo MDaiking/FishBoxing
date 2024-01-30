@@ -23,20 +23,20 @@ MonoBehaviour:
     eatSound: {fileID: 0}
     damage: 25
     damageInUI: 2
-    readyForSwingSpeed: 1.2
+    readyForSwingSpeed: 0.6
     readyForSwingSpeedInUI: 2
     swingSpeed: 0
     swingSpeedInUI: 2
     knockbackPower: 20
     knockbackResistance: 10
     knockbackPowerInUI: 2
-    eatSpeed: 1
-    cooltime: 1
+    eatSpeed: 3
+    cooltime: 3
     eatSpeedInUI: 2
     healAmount: 0
     healAmountInUI: 2
     defaultSize: 1
-    atAttackSize: 10
+    atAttackSize: 3
     offset: {x: -0.17, y: 0.1, z: 0.06}
   - equipObject: {fileID: 7875160510175550214, guid: f775d92b3ff22174ca485d0d2d971f92, type: 3}
     equipImage: {fileID: 21300000, guid: 1bcaf2be6ea80484fb298c9ff6cb8b5b, type: 3}
@@ -46,22 +46,22 @@ MonoBehaviour:
     swingSound: {fileID: 8300000, guid: 7aebb6f5c5e67454a8db77fa28ac3102, type: 3}
     hitSound: {fileID: 8300000, guid: 10be7f0c45f53e243b12ab15d7e60872, type: 3}
     eatSound: {fileID: 0}
-    damage: 21
+    damage: 42
     damageInUI: 2
-    readyForSwingSpeed: 1.1
+    readyForSwingSpeed: 1
     readyForSwingSpeedInUI: 1
     swingSpeed: 0
     swingSpeedInUI: 2
-    knockbackPower: 18
-    knockbackResistance: 8
+    knockbackPower: 28
+    knockbackResistance: 12
     knockbackPowerInUI: 2
-    eatSpeed: 1
-    cooltime: 1
+    eatSpeed: 3.5
+    cooltime: 3.5
     eatSpeedInUI: 1
-    healAmount: 0
+    healAmount: 40
     healAmountInUI: 3
     defaultSize: 1
-    atAttackSize: 1
+    atAttackSize: 4
     offset: {x: -0.25, y: 0.2, z: 0}
   - equipObject: {fileID: 737533056802261942, guid: ef2a4410bd5270e44b31111d8e913e0c, type: 3}
     equipImage: {fileID: 21300000, guid: 2e204e7175a6be04ea0e09a49f57a4c9, type: 3}
@@ -73,7 +73,7 @@ MonoBehaviour:
     eatSound: {fileID: 0}
     damage: 12
     damageInUI: 0
-    readyForSwingSpeed: 0.3
+    readyForSwingSpeed: 0.1
     readyForSwingSpeedInUI: 4
     swingSpeed: 0
     swingSpeedInUI: 4
@@ -81,12 +81,12 @@ MonoBehaviour:
     knockbackResistance: 10
     knockbackPowerInUI: 0
     eatSpeed: 0.5
-    cooltime: 1
+    cooltime: 0.5
     eatSpeedInUI: 3
-    healAmount: 0
+    healAmount: 10
     healAmountInUI: 1
     defaultSize: 1
-    atAttackSize: 5
+    atAttackSize: 4
     offset: {x: -0.26, y: 0.179, z: -0.026}
   - equipObject: {fileID: 3891397602343789287, guid: 64f2e13645d680944876400f37fedb16, type: 3}
     equipImage: {fileID: 21300000, guid: 7dceada4b4316984bbe5b966c98f001e, type: 3}
@@ -96,22 +96,22 @@ MonoBehaviour:
     swingSound: {fileID: 8300000, guid: 7aebb6f5c5e67454a8db77fa28ac3102, type: 3}
     hitSound: {fileID: 8300000, guid: 10be7f0c45f53e243b12ab15d7e60872, type: 3}
     eatSound: {fileID: 0}
-    damage: 10
+    damage: 43
     damageInUI: 3
-    readyForSwingSpeed: 0.5
+    readyForSwingSpeed: 0.8
     readyForSwingSpeedInUI: 1
     swingSpeed: 0
     swingSpeedInUI: 2
-    knockbackPower: 0
-    knockbackResistance: 0
-    knockbackPowerInUI: 1
-    eatSpeed: 1
-    cooltime: 1
+    knockbackPower: 20
+    knockbackResistance: 30
+    knockbackPowerInUI: 3
+    eatSpeed: 2
+    cooltime: 2
     eatSpeedInUI: 1
-    healAmount: 0
+    healAmount: 20
     healAmountInUI: 3
     defaultSize: 1
-    atAttackSize: 1
+    atAttackSize: 4
     offset: {x: -0.32, y: 0.22, z: 0.02}
   - equipObject: {fileID: 2128577369806575190, guid: 5931c61373125c746a63de40d36c1a4d, type: 3}
     equipImage: {fileID: 21300000, guid: f628316843ed70d448e688dd7afac93e, type: 3}
@@ -123,7 +123,7 @@ MonoBehaviour:
     eatSound: {fileID: 0}
     damage: 80
     damageInUI: 4
-    readyForSwingSpeed: 2
+    readyForSwingSpeed: 1.8
     readyForSwingSpeedInUI: 0
     swingSpeed: 0
     swingSpeedInUI: 0

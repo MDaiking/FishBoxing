@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerDeath))]
 public class CameraRotate : Unity.Netcode.NetworkBehaviour
 {
 	private bool canRotate;
@@ -15,6 +16,7 @@ public class CameraRotate : Unity.Netcode.NetworkBehaviour
 	}
 	private PlayerInput playerInput;
 	private InputAction rotate;
+	private PlayerDeath playerDeath;
 	private Vector2 rotateAxis;
 	[SerializeField]
 	private GameObject cameraRoot;
@@ -37,6 +39,7 @@ public class CameraRotate : Unity.Netcode.NetworkBehaviour
 	{
 		if (IsOwner)
 		{
+			playerDeath = GetComponent<PlayerDeath>();
 			rotateCharacter = transform.localRotation;
 			playerInput = GetComponent<PlayerInput>();
 			rotate = playerInput.actions["Rotate"];
@@ -48,7 +51,7 @@ public class CameraRotate : Unity.Netcode.NetworkBehaviour
 	private void Update()
 	{
 		canRotate = !cursorController.IsCursorShow;
-		if (canRotate && IsOwner)
+		if (canRotate && IsOwner && !playerDeath.IsPlayerDead)
 		{
 			rotateAxis = rotate.ReadValue<Vector2>();
 			CalcPitch();

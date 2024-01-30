@@ -5,12 +5,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Image), typeof(RectTransform))]
+[RequireComponent(typeof(Image), typeof(RectTransform), typeof(AudioSource))]
 public class FishPanel : ButtonInUI
 {
 	private SelectWeaponParent selectWeaponParent;
 	private RectTransform rtransform;
 	private AboutWeaponController aboutWeaponController;
+	private AudioSource audioSource;
 	private float width;
 	private float height;
 	[SerializeField]
@@ -24,6 +25,10 @@ public class FishPanel : ButtonInUI
 	[SerializeField]
 	private Color selectedPanelColor;
 
+	[SerializeField]
+	private AudioClip enterSound;
+	[SerializeField]
+	private AudioClip clickSound;
 	private void Start()
 	{
 		rtransform = GetComponent<RectTransform>();
@@ -31,6 +36,7 @@ public class FishPanel : ButtonInUI
 		selectWeaponParent = GameObject.FindWithTag("SelectWeapons").GetComponent<SelectWeaponParent>();
 		aboutWeaponController = GameObject.FindWithTag("AboutWeapon").GetComponent<AboutWeaponController>();
 		image = transform.GetChild(0).GetComponent<Image>();
+		audioSource = GetComponent<AudioSource>();
 		SetEnable(false);
 		AddEventTrigger(new Action(() => { if (!isSelected) { EnterToMe(); } }),
 			new Action(() => { if (!isSelected) { ExitFromMe(); } }),
@@ -55,6 +61,7 @@ public class FishPanel : ButtonInUI
 	}
 	public void EnterToMe()
 	{
+		audioSource.PlayOneShot(enterSound);
 		panel.color = selectedPanelColor;
 		aboutWeaponController.SetWeaponStatus(fishNum);
 	}
@@ -65,6 +72,7 @@ public class FishPanel : ButtonInUI
 	}
 	private void ClickMe()
 	{
+		audioSource.PlayOneShot(clickSound);
 		PlayerEquips playerEquips = selectWeaponParent.PlayerEquip;
 		if (playerEquips != null)
 		{

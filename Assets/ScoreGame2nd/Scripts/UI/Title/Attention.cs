@@ -8,6 +8,8 @@ using DG.Tweening;
 
 public class Attention : MonoBehaviour
 {
+	[SerializeField]
+	private TitleController titleController;
 	private Fade fade;
 	private SystemInputList systemInputList;
 	private TextMeshProUGUI tmPro;
@@ -62,7 +64,7 @@ public class Attention : MonoBehaviour
 		fadeinTween.Kill();
 		fadeoutTween = fade.Fadeout(fadeSpeed)
 			.OnStart(() => { isHiding = true; })
-			.OnComplete(() => { isShow = false; isHiding = false; });
+			.OnComplete(() => { isShow = false; isHiding = false; titleController.ToggleTitleActive(true); });
 	}
 
 }

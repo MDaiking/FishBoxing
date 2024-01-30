@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(CanvasGroup))]
+using DG.Tweening;
+[RequireComponent(typeof(CanvasGroup),typeof(Fade))]
 
 public class TitleController : MonoBehaviour
 {
-    GameObject title;
+    Fade fade;
     List<GameObject> children = new List<GameObject>();
 
     CanvasGroup canvasGroup;
@@ -13,7 +14,7 @@ public class TitleController : MonoBehaviour
     private TitleMenuController titleButtons;
     void Start()
     {
-        title = GameObject.FindWithTag("Title");
+        fade = GetComponent<Fade>();
         canvasGroup = GetComponent<CanvasGroup>();
         foreach(Transform child in transform)
 		{
@@ -22,7 +23,10 @@ public class TitleController : MonoBehaviour
     }
     void Update()
     {
-        
+        canvasGroup.alpha = 0.0f;
+        canvasGroup.alpha = fade.Alpha;
+
+
     }
 
     public void ToggleTitleActive(bool active)
@@ -30,6 +34,10 @@ public class TitleController : MonoBehaviour
         foreach(GameObject child in children)
 		{
             child.SetActive(active);
+		}
+		if (active)
+		{
+            fade.Fadein(1.0f);
 		}
 	}
 }

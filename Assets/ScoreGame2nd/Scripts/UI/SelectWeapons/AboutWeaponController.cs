@@ -7,6 +7,9 @@ using TMPro;
 public class AboutWeaponController : MonoBehaviour
 {
 	[SerializeField]
+	private Sprite nullImage;
+	private Color nullImageColor;
+	[SerializeField]
 	private List<FishPanel> fishPanels = new List<FishPanel>();
 	[SerializeField]
 	private EquipLists equipLists;
@@ -35,6 +38,7 @@ public class AboutWeaponController : MonoBehaviour
 				fishPanels.Add(fishPanel);
 			}
 		}
+		nullImageColor = GetComponent<Image>().color;
 	}
 	private void Update()
 	{
@@ -51,7 +55,8 @@ public class AboutWeaponController : MonoBehaviour
 		{
 			if (nowSelectFish == -1)
 			{
-				image.sprite = null;
+				image.sprite = nullImage;
+				image.color = nullImageColor;
 				ruby.text = "";
 				name.text = "";
 				explanation.text = "";
@@ -66,6 +71,7 @@ public class AboutWeaponController : MonoBehaviour
 		{
 			EquipParam equipParam = equipLists.equipParamList[num];
 			image.sprite = equipParam.equipImage;
+			image.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 			ruby.text = equipParam.ruby;
 			name.text = equipParam.name;
 			explanation.text = equipParam.explanation;

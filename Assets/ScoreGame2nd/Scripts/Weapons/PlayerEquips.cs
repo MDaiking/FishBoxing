@@ -49,7 +49,7 @@ public class PlayerEquips : MonoBehaviour
 	}
 	private void ScrollWeapon()//ホイール操作を読み取って武器をスクロールで変更させる
 	{
-		if (!GetNowWeapon().CanUseWeapon)
+		if (GetNowWeapon() == null || !GetNowWeapon().CanUseWeapon)
 		{
 			return;
 		}
@@ -104,6 +104,13 @@ public class PlayerEquips : MonoBehaviour
 	}
 	public Weapon GetNowWeapon()
 	{
-		return playerWeapons[nowEquip];
+		if (playerWeapons.Count == 0)
+		{
+			return null;
+		}
+		else
+		{
+			return playerWeapons[nowEquip];
+		}
 	}
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-[RequireComponent(typeof(RectTransform))]
+[RequireComponent(typeof(RectTransform), typeof(AudioSource))]
 
 public class SelectWeaponParent : MonoBehaviour
 {
@@ -21,7 +21,9 @@ public class SelectWeaponParent : MonoBehaviour
 			}
 		}
 	}
-
+	private AudioSource audioSource;
+	[SerializeField]
+	private AudioClip shopSound;
 	[SerializeField]
 	private CursorController cursorController;
 	[SerializeField]
@@ -41,6 +43,7 @@ public class SelectWeaponParent : MonoBehaviour
 	{
 		canMove = true;
 		rectTransform = GetComponent<RectTransform>();
+		audioSource = GetComponent<AudioSource>();
 		InstantToggleUI(false);
 		ToggleUI(true);
 	}
@@ -57,6 +60,7 @@ public class SelectWeaponParent : MonoBehaviour
 		isShow = value;
 		if (value)
 		{
+			audioSource.PlayOneShot(shopSound);
 			SetActiveAllChildren(true);
 			cursorController.IsCursorShow = true;
 			rectTransform.DOLocalMove(new Vector3(0.0f, 0.0f, 0.0f), moveTimeToShow).SetEase(Ease.OutBounce)
@@ -65,7 +69,7 @@ public class SelectWeaponParent : MonoBehaviour
 		}
 		else
 		{
-			int screenHeight = Screen.height * 2;
+			int screenHeight = Screen.height;
 			cursorController.IsCursorShow = false;
 			rectTransform.DOLocalMove(new Vector3(0.0f, screenHeight, 0.0f), moveTimeToHide).SetEase(Ease.OutQuad)
 				.OnStart(() => { canMove = false; })

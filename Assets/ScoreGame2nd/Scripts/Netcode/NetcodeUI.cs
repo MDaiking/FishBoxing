@@ -22,6 +22,7 @@ public class NetcodeUI : MonoBehaviour
 		{
 			// 接続先のIPアドレスとポートを指定
 			unityTransport.ConnectionData.ServerListenAddress = ipAddress;
+			
 		}
 		Debug.Log($"client connect : ip={ipAddress}, port={port}");
 

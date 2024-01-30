@@ -816,8 +816,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "IP\u30A2\u30C9\u30EC\u30B9\u3092\u5165\u529B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
-  m_sharedMaterial: {fileID: 8140706337417111528, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
+  m_sharedMaterial: {fileID: 8140706337417111528, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1360,8 +1360,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u7D42\u4E86"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
-  m_sharedMaterial: {fileID: 8140706337417111528, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 13259c6eb8a85a540affadf9993cf9d7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1495,7 +1495,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 588147426}
-    PlayerPrefab: {fileID: 8550614373256550257, guid: 6a49e1fc8af9e2949af5cee269839b6c, type: 3}
+    PlayerPrefab: {fileID: 6414092834620150833, guid: ee1423b65a48a0c4a9318274583dea71, type: 3}
     Prefabs:
       NetworkPrefabsLists: []
     TickRate: 30
@@ -1590,8 +1590,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Now Loading...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
-  m_sharedMaterial: {fileID: 8140706337417111528, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
+  m_sharedMaterial: {fileID: 8140706337417111528, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1742,8 +1742,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u30DB\u30B9\u30C8\u3067\u958B\u59CB"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
-  m_sharedMaterial: {fileID: 8140706337417111528, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
+  m_sharedMaterial: {fileID: 8140706337417111528, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2518,8 +2518,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u63A5\u7D9A"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
-  m_sharedMaterial: {fileID: 8140706337417111528, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
+  m_sharedMaterial: {fileID: 8140706337417111528, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2761,6 +2761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae578fe9822b84c4ab56affc352b7d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  titleController: {fileID: 1549928601}
   fadeSpeed: 1
   showTime: 5
 --- !u!114 &1490214309
@@ -2797,6 +2798,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1549928600}
   - component: {fileID: 1549928601}
+  - component: {fileID: 1549928602}
+  - component: {fileID: 1549928603}
   m_Layer: 5
   m_Name: TitleMenus
   m_TagString: Untagged
@@ -2839,6 +2842,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titleButtons: {fileID: 450017192}
+--- !u!225 &1549928602
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549928599}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1549928603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549928599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b178d3bbd1d3648bebc4b463df133b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1607526417
 GameObject:
   m_ObjectHideFlags: 0
@@ -3467,8 +3494,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
-  m_sharedMaterial: {fileID: 8140706337417111528, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
+  m_sharedMaterial: {fileID: 8140706337417111528, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
