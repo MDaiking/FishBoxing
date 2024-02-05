@@ -816,8 +816,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "IP\u30A2\u30C9\u30EC\u30B9\u3092\u5165\u529B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
-  m_sharedMaterial: {fileID: 8140706337417111528, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
+  m_sharedMaterial: {fileID: 8140706337417111528, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1360,8 +1360,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u7D42\u4E86"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 13259c6eb8a85a540affadf9993cf9d7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
+  m_sharedMaterial: {fileID: 8140706337417111528, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1435,102 +1435,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545303376}
   m_CullTransparentMesh: 1
---- !u!1 &588147425
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 588147428}
-  - component: {fileID: 588147427}
-  - component: {fileID: 588147426}
-  m_Layer: 0
-  m_Name: NetworkManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &588147426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588147425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6960e84d07fb87f47956e7a81d71c4e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ProtocolType: 0
-  m_MaxPacketQueueSize: 128
-  m_MaxPayloadSize: 6144
-  m_HeartbeatTimeoutMS: 500
-  m_ConnectTimeoutMS: 1000
-  m_MaxConnectAttempts: 60
-  m_DisconnectTimeoutMS: 30000
-  ConnectionData:
-    Address: 127.0.0.1
-    Port: 7777
-    ServerListenAddress: 127.0.0.1
-  DebugSimulator:
-    PacketDelayMS: 0
-    PacketJitterMS: 0
-    PacketDropRate: 0
---- !u!114 &588147427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588147425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593a2fe42fa9d37498c96f9a383b6521, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetworkConfig:
-    ProtocolVersion: 0
-    NetworkTransport: {fileID: 588147426}
-    PlayerPrefab: {fileID: 6414092834620150833, guid: ee1423b65a48a0c4a9318274583dea71, type: 3}
-    Prefabs:
-      NetworkPrefabsLists: []
-    TickRate: 30
-    ClientConnectionBufferTimeout: 10
-    ConnectionApproval: 0
-    ConnectionData: 
-    EnableTimeResync: 0
-    TimeResyncInterval: 30
-    EnsureNetworkVariableLengthSafety: 0
-    EnableSceneManagement: 1
-    ForceSamePrefabs: 1
-    RecycleNetworkIds: 1
-    NetworkIdRecycleDelay: 120
-    RpcHashSize: 0
-    LoadSceneTimeOut: 120
-    SpawnTimeout: 1
-    EnableNetworkLogs: 1
-    OldPrefabList: []
-  RunInBackground: 1
-  LogLevel: 0
---- !u!4 &588147428
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588147425}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &685919090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,8 +1494,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Now Loading...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
-  m_sharedMaterial: {fileID: 8140706337417111528, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
+  m_sharedMaterial: {fileID: 8140706337417111528, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1742,8 +1646,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u30DB\u30B9\u30C8\u3067\u958B\u59CB"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
-  m_sharedMaterial: {fileID: 8140706337417111528, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
+  m_sharedMaterial: {fileID: 8140706337417111528, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2518,8 +2422,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u63A5\u7D9A"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
-  m_sharedMaterial: {fileID: 8140706337417111528, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
+  m_sharedMaterial: {fileID: 8140706337417111528, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2605,7 +2509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ad5440a70986d4eb260c258dda8cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  netcodeUI: {fileID: 0}
   gameManager: {fileID: 227160320}
   inputField: {fileID: 2028933168}
   loadingController: {fileID: 883075664}
@@ -3110,6 +3013,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
+--- !u!1 &1914686970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1914686972}
+  - component: {fileID: 1914686971}
+  m_Layer: 0
+  m_Name: PhotonManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1914686971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914686970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1713284c050d6124290bcd6ee254c17a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1914686972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914686970}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0269177, y: 6.2460957, z: -0.38651228}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1917366576
 GameObject:
   m_ObjectHideFlags: 0
@@ -3494,8 +3441,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
-  m_sharedMaterial: {fileID: 8140706337417111528, guid: 093ea416e7d809f49950198de9523f3b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
+  m_sharedMaterial: {fileID: 8140706337417111528, guid: e340f68c541eb8b47abfbdb5394c8265, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3744,50 +3691,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2028933166}
   m_CullTransparentMesh: 1
---- !u!1 &2077765979
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2077765981}
-  - component: {fileID: 2077765980}
-  m_Layer: 0
-  m_Name: NetcodeUI
-  m_TagString: NetcodeUI
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2077765980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2077765979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24b02585de0a9b7458bd019ed01ab874, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &2077765981
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2077765979}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.35729972, y: 2.566425, z: -1.1660466}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3801,5 +3704,4 @@ SceneRoots:
   - {fileID: 1354046558}
   - {fileID: 27941992}
   - {fileID: 1917366578}
-  - {fileID: 2077765981}
-  - {fileID: 588147428}
+  - {fileID: 1914686972}
