@@ -8,8 +8,6 @@ using TMPro;
 public class StartClientButton : ButtonInUI
 {
 	[SerializeField]
-	private NetcodeUI netcodeUI;
-	[SerializeField]
 	private GameManager gameManager;
 	[SerializeField]
 	private TMP_InputField inputField;
@@ -26,7 +24,6 @@ public class StartClientButton : ButtonInUI
 	private void Start()
 	{
 		tmpro = GetComponent<TextMeshProUGUI>();
-		netcodeUI = GameObject.FindWithTag("NetcodeUI").GetComponent<NetcodeUI>();
 		AddEventTrigger(new Action(() =>
 		{
 			tmpro.color = selectedColor;
@@ -43,7 +40,6 @@ public class StartClientButton : ButtonInUI
 	private void StartClient()
 	{
 		string clientip = inputField.text;
-		netcodeUI.ChangeIpAddress(clientip);
-		netcodeUI.StartClient();
+
 	}
 }

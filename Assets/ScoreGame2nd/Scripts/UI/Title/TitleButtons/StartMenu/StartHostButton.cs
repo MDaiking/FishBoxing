@@ -14,7 +14,6 @@ public class StartHostButton : ButtonInUI
 	private LoadingController loadingController;
 	[SerializeField]
 	private string multiBattleScene;
-	private NetcodeUI netcodeUI;
 	private TextMeshProUGUI tmpro;
 	[SerializeField]
 	private Color unselectedColor;
@@ -24,7 +23,6 @@ public class StartHostButton : ButtonInUI
 	private void Start()
 	{
 		tmpro = GetComponent<TextMeshProUGUI>();
-		netcodeUI = GameObject.FindWithTag("NetcodeUI").GetComponent<NetcodeUI>();
 		AddEventTrigger(new Action(() =>
 		{
 			tmpro.color = selectedColor;
@@ -40,7 +38,6 @@ public class StartHostButton : ButtonInUI
 	}
 	private void StartHost()
 	{
-		netcodeUI.StartHost();
 		SceneManager.LoadScene("ShaderTest");
 	}
 }

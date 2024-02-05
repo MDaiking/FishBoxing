@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerKnockback : Unity.Netcode.NetworkBehaviour
+public class PlayerKnockback : MonoBehaviour
 {
 	private bool isKnockback;
 	private bool isCrouched;
@@ -20,18 +20,12 @@ public class PlayerKnockback : Unity.Netcode.NetworkBehaviour
 
 	private void Start()
 	{
-		if (IsOwner)
-		{
-			isKnockback = false;
-			isCrouched = false;
-		}
+		isKnockback = false;
+		isCrouched = false;
 	}
 	private void FixedUpdate()
 	{
-		if (IsOwner && isKnockback)
-		{
-			++knockbackTimer;
-		}
+		++knockbackTimer;
 	}
 	public void SetKnockback(Vector3 direction, float power, float resistance)
 	{
