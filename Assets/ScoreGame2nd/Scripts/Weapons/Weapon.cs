@@ -113,7 +113,7 @@ public class Weapon : MonoBehaviour
 			}
 			else
 			{
-				Debug.LogError(enemyStatus + "に\"PlayerStatus\"がコンポーネントされていません");
+				Debug.LogError($"{enemyStatus}に\"PlayerStatus\"がコンポーネントされていません");
 			}
 			PlayerKnockback enemyKB = enemy.GetComponent<PlayerKnockback>();
 			if (enemyKB != null)
@@ -122,7 +122,7 @@ public class Weapon : MonoBehaviour
 			}
 			else
 			{
-				Debug.LogError(enemyStatus + "に\"PlayerKnockback\"がコンポーネントされていません");
+				Debug.LogError($"{enemyStatus}に\"PlayerKnockback\"がコンポーネントされていません");
 			}
 		}
 	}

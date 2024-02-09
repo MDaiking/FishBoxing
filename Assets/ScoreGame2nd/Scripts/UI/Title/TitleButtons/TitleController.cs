@@ -10,8 +10,6 @@ public class TitleController : MonoBehaviour
     List<GameObject> children = new List<GameObject>();
 
     CanvasGroup canvasGroup;
-    [SerializeField]
-    private TitleMenuController titleButtons;
     void Start()
     {
         fade = GetComponent<Fade>();
@@ -20,6 +18,7 @@ public class TitleController : MonoBehaviour
 		{
             children.Add(child.gameObject);
 		}
+        ToggleTitleActive(false);
     }
     void Update()
     {

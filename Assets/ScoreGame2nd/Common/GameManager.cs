@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 		int checkEquipListsError = CheckEquipLists();
 		if (checkEquipListsError != -1)
 		{
-			Debug.LogError("EquipLists“à‚ÌGameObjct[" + checkEquipListsError + "]‚ÍWeapon Script‚ª“ü‚Á‚Ä‚¢‚Ü‚¹‚ñ\n•Ší‚Ì‚İ“ü‚ê‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·");
+			Debug.LogError($"EquipLists“à‚ÌGameObjct[{checkEquipListsError}]‚ÍWeapon Script‚ª“ü‚Á‚Ä‚¢‚Ü‚¹‚ñ\n•Ší‚Ì‚İ“ü‚ê‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·");
 		}
 		GetMyIPAddress();
 	}

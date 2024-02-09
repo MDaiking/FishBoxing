@@ -14,7 +14,7 @@ public class HPBar : MonoBehaviour
 	{
 		if (maxhp == 0)
 		{
-			Debug.LogWarning(this + "‚ª0‚ÅœZ‚µ‚æ‚¤‚Æ‚µ‚Ü‚µ‚½: HPBar");
+			Debug.LogWarning($"{this}‚ª0‚ÅœZ‚µ‚æ‚¤‚Æ‚µ‚Ü‚µ‚½");
 			return;
 		}
 		hpbar.value = (float)hp / (float)maxhp;
