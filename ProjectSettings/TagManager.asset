@@ -15,6 +15,7 @@ TagManager:
   - SelectWeapons
   - AboutWeapon
   - NetcodeUI
+  - ServerNameInput
   layers:
   - Default
   - TransparentFX

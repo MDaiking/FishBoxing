@@ -7,7 +7,7 @@ public class CreditButton : ButtonInUI
 	[SerializeField]
 	private CreditController creditController;
 	[SerializeField]
-	private TitleMenuController titleButtons;
+	private MenuController titleButtons;
 
 	private bool isActive;
 	private void Start()
@@ -20,7 +20,7 @@ public class CreditButton : ButtonInUI
 		isActive = !isActive;
 		if (isActive)
 		{
-			titleButtons.ToggleTitleMenuActive(false);
+			titleButtons.ToggleMenuActive(false);
 		}
 	}
 }

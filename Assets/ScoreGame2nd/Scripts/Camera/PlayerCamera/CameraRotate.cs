@@ -4,15 +4,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerDeath))]
-public class CameraRotate : Unity.Netcode.NetworkBehaviour
+public class CameraRotate : MonoBehaviour
 {
 	private bool canRotate;
 	private CursorController cursorController;
 	[SerializeField]
 	private float rotateSpeed;
-	public float RotateSpeed{
-		get{ return rotateSpeed; }
-		set{ rotateSpeed = value; }
+	public float RotateSpeed
+	{
+		get { return rotateSpeed; }
+		set { rotateSpeed = value; }
 	}
 	private PlayerInput playerInput;
 	private InputAction rotate;
@@ -37,34 +38,24 @@ public class CameraRotate : Unity.Netcode.NetworkBehaviour
 	//private RotateText rotateText;
 	private void Start()
 	{
-		if (IsOwner)
-		{
-			playerDeath = GetComponent<PlayerDeath>();
-			rotateCharacter = transform.localRotation;
-			playerInput = GetComponent<PlayerInput>();
-			rotate = playerInput.actions["Rotate"];
-			cursorController = GameObject.FindWithTag("GameController").GetComponent<CursorController>();
-			//rotateText = GameObject.Find("rotate").GetComponent<RotateText>();
-		}
+		playerDeath = GetComponent<PlayerDeath>();
+		rotateCharacter = transform.localRotation;
+		playerInput = GetComponent<PlayerInput>();
+		rotate = playerInput.actions["Rotate"];
+		cursorController = GameObject.FindWithTag("GameController").GetComponent<CursorController>();
+		//rotateText = GameObject.Find("rotate").GetComponent<RotateText>();
 	}
 
 	private void Update()
 	{
 		canRotate = !cursorController.IsCursorShow;
-		if (canRotate && IsOwner && !playerDeath.IsPlayerDead)
+		if (canRotate && !playerDeath.IsPlayerDead)
 		{
 			rotateAxis = rotate.ReadValue<Vector2>();
 			CalcPitch();
 			CalcYaw();
-			SetRotateInputServerRpc(pitch, yaw);
 			//rotateText.Rotate = rotateAxis.x;
 		}
-	}
-	[Unity.Netcode.ServerRpc]
-	private void SetRotateInputServerRpc(float _pitch, float _yaw)//client側で計算した方向をサーバー側に入れる
-	{
-		this.pitch = _pitch;
-		this.yaw = _yaw;
 	}
 	private void FixedUpdate()
 	{
@@ -72,13 +63,12 @@ public class CameraRotate : Unity.Netcode.NetworkBehaviour
 	}
 	private void RotateUpdate()
 	{
-		if (IsOwner)
-		{
-			//　キャラクターの回転を実行
-			transform.rotation = Quaternion.Euler(0.0f, pitch + CameraAngleOverride, 0.0f);
-			//　カメラの回転を実行
-			cameraRoot.transform.rotation = Quaternion.Euler(yaw, pitch + CameraAngleOverride, 0.0f);
-		}
+
+		//　キャラクターの回転を実行
+		transform.rotation = Quaternion.Euler(0.0f, pitch + CameraAngleOverride, 0.0f);
+		//　カメラの回転を実行
+		cameraRoot.transform.rotation = Quaternion.Euler(yaw, pitch + CameraAngleOverride, 0.0f);
+
 
 	}
 	private void CalcPitch()

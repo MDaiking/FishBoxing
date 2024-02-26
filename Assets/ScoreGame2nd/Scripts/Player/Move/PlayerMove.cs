@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInputList), typeof(Rigidbody), typeof(Animator))]
 [RequireComponent(typeof(UseWeapon), typeof(PlayerKnockback), typeof(PlayerDeath))]
 
-public class PlayerMove : Unity.Netcode.NetworkBehaviour
+public class PlayerMove : MonoBehaviour
 {
 	private PlayerInputList playerInputList;
 	[SerializeField]//ˆÚ“®‘¬“x
@@ -45,42 +45,30 @@ public class PlayerMove : Unity.Netcode.NetworkBehaviour
 
 	private void Start()
 	{
-		if (IsOwner)
-		{
-			playerInputList = GetComponent<PlayerInputList>();
-			rb = GetComponent<Rigidbody>();
-			animator = GetComponent<Animator>();
-			useWeapon = GetComponent<UseWeapon>();
-			playerKnockback = GetComponent<PlayerKnockback>();
-			playerDeath = GetComponent<PlayerDeath>();
-			enableIsCrouch = true;
-			isCrouch = false;
-		}
+		playerInputList = GetComponent<PlayerInputList>();
+		rb = GetComponent<Rigidbody>();
+		animator = GetComponent<Animator>();
+		useWeapon = GetComponent<UseWeapon>();
+		playerKnockback = GetComponent<PlayerKnockback>();
+		playerDeath = GetComponent<PlayerDeath>();
+		enableIsCrouch = true;
+		isCrouch = false;
 	}
 
 	private void Update()
 	{
-		if (IsOwner)
+		ToggleCrouch();
+		CalcMove();
+
+		MoveAnimation();
+		CameraRootMove();
+		playerKnockback.IsCrouched = IsCrouch;
+		if (transform.position.y <= 0.0f)
 		{
-			ToggleCrouch();
-			CalcMove();
-			SetMoveInputServerRpc(velocity, verticalVelocity);
-			MoveAnimation();
-			CameraRootMove();
-			playerKnockback.IsCrouched = IsCrouch;
-			if (transform.position.y <= 0.0f)
-			{
-				playerDeath.Death();
-				rb.drag = CalcDrag(true);
-			}
-			rb.velocity = (velocity + new Vector3(0f, verticalVelocity, 0f) + playerKnockback.CalcKnockback());
+			playerDeath.Death();
+			rb.drag = CalcDrag(true);
 		}
-	}
-	[Unity.Netcode.ServerRpc]
-	private void SetMoveInputServerRpc(Vector3 _velocity, float _verticalVelocity)
-	{
-		this.velocity = _velocity;
-		this.verticalVelocity = _verticalVelocity;
+		rb.velocity = (velocity + new Vector3(0f, verticalVelocity, 0f) + playerKnockback.CalcKnockback());
 	}
 
 	private void CameraRootMove()

@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 namespace Unity.Netcode.Samples.APIDiorama.RPC
 {
-	public class PlayerSetup : Unity.Netcode.NetworkBehaviour
+	public class PlayerSetup : MonoBehaviour
 	{
 		private GameObject I;
 		[SerializeField]
@@ -24,20 +24,16 @@ namespace Unity.Netcode.Samples.APIDiorama.RPC
 			return new Vector3(0.0f, 5.0f, 0.0f);
 		}
 
-		public override void OnNetworkSpawn()
+		public void Start()
 		{
-			base.OnNetworkSpawn();
 			I = this.gameObject;
 			transform.position = GetSpawnPosition();
-			if (IsOwner)
-			{
-				SettingSetup();
-				CameraSetup();
-			}
+			SettingSetup();
+			CameraSetup();
 		}
 		private void Update()
 		{
-			
+
 		}
 		private void CameraSetup()
 		{
@@ -55,7 +51,7 @@ namespace Unity.Netcode.Samples.APIDiorama.RPC
 		}
 		private void CurrentLayerSetup()//ÉåÉCÉÑÅ[ê›íË
 		{
-			if (IsOwner)
+			if (this.gameObject)
 			{
 				SetTag(I, "Player");
 				SetAllLayer(I, 6);//6:Player

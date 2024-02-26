@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 
-public class CameraChange : Unity.Netcode.NetworkBehaviour
+public class CameraChange : MonoBehaviour
 {
 	private CinemachineVirtualCamera fpsCamera;
 	private CinemachineVirtualCamera tpsCamera;
@@ -59,10 +59,7 @@ public class CameraChange : Unity.Netcode.NetworkBehaviour
 
 	private void Update()
 	{
-		if (IsOwner)
-		{
-			//CheckSwitchCamera();
-		}
+
 	}
 	private void CheckSwitchCamera()//FPS‚ÆTPS‚ğØ‚è‘Ö‚¦‚é‚©‚ğŠÄ‹
 	{
